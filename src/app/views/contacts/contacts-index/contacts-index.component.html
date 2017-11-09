@@ -1,0 +1,11 @@
+<h1> Contact list</h1>
+
+<app-contact-search [query]="searchQuery$ | async" [searching]="loading$ | async" 
+(search)="search($event)" [error]="error$ | async"></app-contact-search>
+
+
+<app-contact-list [contacts]="contacts$ | async"
+                  (onShow)="showContact($event)"
+                  (onDelete)="deleteContact($event)"
+                  (onEdit)="editContact($event)"
+></app-contact-list>
