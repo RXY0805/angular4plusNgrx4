@@ -13,6 +13,8 @@ import * as fromContacts from './store'
 import {EffectsModule} from '@ngrx/effects';
 import {ContactsEffects} from './store/effects/contacts-effects';
 
+import {initialState} from './store/reducers/search'
+
 @NgModule({
   imports: [
     CommonModule,

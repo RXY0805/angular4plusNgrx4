@@ -9,6 +9,8 @@ import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
 
 import 'rxjs/add/operator/take';
+import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
+//import { getSearchResultContacts } from '@app-contacts-store';
 
 @Component({
   selector: 'app-contacts-index',
@@ -23,17 +25,19 @@ export class ContactsIndexComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string>;
   
-  constructor(public store: Store<fromRoot.State>, private router: Router, private actR: ActivatedRoute) {
-      this.searchQuery$ = this.store.select(fromContacts.getSearchQuery).take(1);
-      this.loading$ = store.select(fromContacts.getSearchLoading);
-      this.error$ = store.select(fromContacts.getSearchError);
+  constructor(
+      public store: Store<fromContacts.State>, 
+      private router: Router, 
+      private actR: ActivatedRoute) {
+      // this.loading$ = store.select(x => fromContacts.getSearchLoading(x.contacts.search));
+      // this.error$ = store.select(x => fromContacts.getSearchError(x.contacts.search));
    }
 
   ngOnInit() {
     // getAllContacts selector from the main store allows us to monitor changes only on id list from the main state
     // without monitoring the rest of the state
-    this.contacts$ = this.store.select(fromContacts.getAllContacts);
-    
+    //this.contacts$ = this.store.select(fromContacts.getAllContacts);
+    this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
   }
   
