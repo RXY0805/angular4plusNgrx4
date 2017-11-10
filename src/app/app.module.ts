@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +26,7 @@ import * as fromRoot from '@app-root-store';
     EffectsModule.forRoot([]), /* Start monitoring app's side effects */
     StoreDevtoolsModule.instrument({ maxAge: 50 })
   ],
-  providers: [],
+  providers: [ {provide: APP_BASE_HREF, useValue: '/Angular/dist/'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

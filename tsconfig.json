@@ -23,7 +23,8 @@
       "@app-root-store": ["app/store/index"],
 
       "@app-contacts-store/*": ["app/views/contacts/store/*"],
-      "@app-contacts-store": ["app/views/contacts/store/index"]
+      "@app-contacts-store": ["app/views/contacts/store/index"],
+      "@app-data-folder": ["assets/data/"]
     }
   }
 }

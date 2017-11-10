@@ -15,7 +15,7 @@ export class ContactsService {
 
   getAllContacts(): Observable<Contact[]> {
   
-       return this.http.get<Contact[]>("/assets/data/company.json")
+       return this.http.get<Contact[]>(`${environment.dataFolder}/company.json`)
        .map(res=> res);
     // call 3DSS api service 
     //  return this.http

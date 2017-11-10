@@ -50,7 +50,7 @@ export function reducer(state: State = INIT_STATE, {type, payload}: contactsActi
       
       const newContacts = Object.keys(state.entities)
         .map(key => state.entities[key])
-        .filter(contact => contact.name.startsWith(query))
+        .filter(contact => contact.name.toLowerCase().includes(query.toLowerCase()))
         .map(contact => contact.id);
       //debugger;
         return {
