@@ -5,9 +5,9 @@ import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
+  // Remove navigation toolbar 
+  // <app-toolbar [title]="currentPageTitle$ | async" ></app-toolbar>
   template: `      
-    <app-toolbar [title]="currentPageTitle$ | async" ></app-toolbar>
-
     <div class="container">
       <button routerLink="/contacts">Go to contacts</button>
       <router-outlet></router-outlet>

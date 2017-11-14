@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, OnInit} from '@angular/core';
 import { Contact } from '@app-core/models';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,8 @@ import * as fromRoot from '@app-root-store';
 import 'rxjs/add/operator/take';
 import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
 
-//import { getSearchResultContacts } from '@app-contacts-store';
+//import { MatPaginator, MatSort, MatTableDataSource , MatTableModule } from "@angular/material"
+
 
 @Component({
   selector: 'app-contacts-index',
@@ -20,6 +21,10 @@ import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-re
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactsIndexComponent implements OnInit {
+  displayedColumns = ['id', 'name', 'progress', 'color'];
+  // dataSource: MatTableDataSource<any>;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatSort) sort: MatSort;
 
   contacts$: Observable<Contact[]>;
   searchQuery$ : Observable<string>;
@@ -39,11 +44,11 @@ export class ContactsIndexComponent implements OnInit {
     // getAllContacts selector from the main store allows us to monitor changes only on id list from the main state
     // without monitoring the rest of the state
     //this.contacts$ = this.store.select(fromContacts.getAllContacts);
-    this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
-    this.store.dispatch(new contactsActions.LoadAll());
-  
     
-
+    this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+    //let contactListData = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+    this.store.dispatch(new contactsActions.LoadAll());
+    //this.dataSource = new MatTableDataSource(contactListData);
   }
   
   search(query: string){
@@ -52,12 +57,12 @@ export class ContactsIndexComponent implements OnInit {
 
   editContact(contact: Contact) {
     this.store.dispatch(new contactsActions.SetCurrentContactId(contact.id));
-    this.router.navigate(['/contacts', contact.id, 'edit'])
+    this.router.navigate(['/contractors', contact.id, 'edit'])
   }
 
   showContact(contact: Contact) {
     this.store.dispatch(new contactsActions.SetCurrentContactId(contact.id));
-    this.router.navigate(['/contacts', contact.id])
+    this.router.navigate(['/contractors', contact.id])
   }
 
   deleteContact(contact: Contact) {

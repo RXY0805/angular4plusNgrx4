@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
-// import { AlertModule } from 'ngx-bootstrap';
+import { MaterialModule } from './app-material.module';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
-import {SharedModule} from './core/modules/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { SharedModule } from './core/modules/shared.module';
 
 import * as fromRoot from '@app-root-store';
 import { TestComponent } from './test/test.component';
@@ -25,7 +25,7 @@ import { TestComponent } from './test/test.component';
   imports: [
     BrowserModule,
     FormsModule,
-    // AlertModule.forRoot(),
+    MaterialModule,
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(fromRoot.reducers), /* Initialise the Central Store with Application's main reducer*/
