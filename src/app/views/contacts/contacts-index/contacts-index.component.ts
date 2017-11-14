@@ -10,6 +10,7 @@ import * as fromRoot from '@app-root-store';
 
 import 'rxjs/add/operator/take';
 import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
+
 //import { getSearchResultContacts } from '@app-contacts-store';
 
 @Component({
@@ -25,6 +26,7 @@ export class ContactsIndexComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string>;
   
+  
   constructor(
       public store: Store<fromContacts.State>, 
       private router: Router, 
@@ -39,6 +41,9 @@ export class ContactsIndexComponent implements OnInit {
     //this.contacts$ = this.store.select(fromContacts.getAllContacts);
     this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
+  
+    
+
   }
   
   search(query: string){

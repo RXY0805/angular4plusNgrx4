@@ -9,6 +9,7 @@ import {Store} from '@ngrx/store';
     <app-toolbar [title]="currentPageTitle$ | async" ></app-toolbar>
 
     <div class="container">
+      <button routerLink="/contacts">Go to contacts</button>
       <router-outlet></router-outlet>
     </div>
   `,

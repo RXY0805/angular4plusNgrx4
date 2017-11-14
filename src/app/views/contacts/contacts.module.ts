@@ -6,6 +6,7 @@ import {ContactEditComponent} from './contact-edit/contact-edit.component';
 import {ContactNewComponent} from './contact-new/contact-new.component';
 import {ContactsIndexComponent} from './contacts-index/contacts-index.component';
 
+
 import {SharedModule} from '@app-core/modules/shared.module';
 import {ContactsRoutingModule} from './contacts-routing.module';
 import {StoreModule} from '@ngrx/store';

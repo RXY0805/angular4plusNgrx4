@@ -3,5 +3,8 @@ export const environment = {
   appApi: {
     baseUrl: 'http://api.angular-contacts-app.vatsaev.com/api/'
   },
-  dataFolder : '/Angular/dist/assets/data'
+  //for local host 4200
+  // dataFolder : '../assets/data', 
+  // for 3dss integration
+  dataFolder : '../AppScripts/NgApp/assets/data',
 };
