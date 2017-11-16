@@ -10,5 +10,8 @@
   </md-card> -->
 
   <div>
-    <input  placeholder="Search for contractors" [value]="query" (keyup)="search.emit($event.target.value)">
+      <input  placeholder="Search for contractors" [value]="contactFilter.searchText"
+              (keyup)="triggerFilter(contactFilter.searchText = $event.target.value)">
+              Pending <input type="checkbox" [checked]="contactFilter.isPending" 
+              (change)="contactFilter.isPending =!contactFilter.isPending; triggerFilter($event.target.value)" > 
   </div>

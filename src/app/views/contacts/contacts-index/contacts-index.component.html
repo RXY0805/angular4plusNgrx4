@@ -4,9 +4,9 @@
     Bootstrap is working!
 </ngb-alert> -->
 
-<app-contact-search (search)="search($event)" ></app-contact-search>
+<app-contact-search [contactFilter]="contactFilter$" (onSearch)="searchContacts($event)" ></app-contact-search>
 
-<app-contact-list [contacts]="contacts$ | async"
+<app-contact-list [contacts]="allContacts$ | async"
                   (onShow)="showContact($event)"
                   (onDelete)="deleteContact($event)"
                   (onEdit)="editContact($event)"

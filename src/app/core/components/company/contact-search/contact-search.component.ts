@@ -3,6 +3,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 
+
+import { ContactFilter } from '@app-core/models';
+
 @Component({
   selector: 'app-contact-search',
   templateUrl: './contact-search.component.html' ,
@@ -44,8 +47,16 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
   ],
 })
 export class ContactSearchComponent {
-  @Input() query = '';
+
+  @Input() contactFilter: ContactFilter
+
   @Input() searching = false;
   @Input() error = '';
-  @Output() search = new EventEmitter<string>();
+  @Output() onSearch : EventEmitter<ContactFilter> = new EventEmitter<ContactFilter>();
+  
+  triggerFilter(value) {
+
+    this.onSearch.emit(this.contactFilter);
+  }
+ 
 }

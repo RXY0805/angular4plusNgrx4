@@ -25,6 +25,9 @@ export const SEARCH_ERROR = '[Contacts] SEARCH ERROR';
 
 export const SET_CURRENT_CONTACT_ID = '[Contacts] SET CURRENT CONTACT ID';
 
+import { ContactFilter } from '@app-core/models';
+
+
 export class SetCurrentContactId implements Action {
   readonly type = SET_CURRENT_CONTACT_ID;
   constructor(public payload: string) {}
@@ -94,7 +97,7 @@ export class DeleteSuccess implements Action {
 export class Search implements Action {
   readonly type = SEARCH;
 
-  constructor(public payload: string) {}
+  constructor(public payload: ContactFilter) {}
 }
 
 export class SearchComplete implements Action {

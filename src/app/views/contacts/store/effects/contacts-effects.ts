@@ -20,30 +20,14 @@ import 'rxjs/add/operator/takeUntil';
 @Injectable()
 export class ContactsEffects {
 
-    // @Effect()
-    // search$: Observable<Action> = this.actions$
-    //   .ofType<contactActions.Search>(contactActions.SEARCH)
-    //   .map(action => action.payload)
-    //   .switchMap(query => {
-    //     if (query === '') {
-    //        Observable.of(new contactActions.SEARCH_ERROR('SEARCH error');
-    //     }
-  
-    //     const nextSearch$ = this.actions$.ofType(contactActions.SEARCH).skip(1);
-  
-    
-    //   });
-  /* Hit the Contacts Index endpoint of our REST API */
-  /* Dispatch LoadAllSuccess action to the central store with id list returned by the backend as id*/
-  /* 'Contacts Reducers' will take care of the rest */
   @Effect()
   loadAll$: Observable<Action> = this.actions$
-      .ofType(contactActions.LOAD_ALL) /* When [Contacts] LOAD ALL action is dispatched */
-      .startWith(new contactActions.LoadAll())
-      .switchMap(() =>
+      .ofType(contactActions.LOAD_ALL) 
+     // .startWith(new contactActions.LoadAll())
+      .switchMap((payload) =>
           this.contactsService.getAllContacts() 
-              .map((contacts: Contact[]) => new contactActions.LoadAllSuccess(contacts))
-      );
+      )
+      .map((contacts: Contact[]) => new contactActions.LoadAllSuccess(contacts));
 
   @Effect()
   load$: Observable<Action> = this.actions$
