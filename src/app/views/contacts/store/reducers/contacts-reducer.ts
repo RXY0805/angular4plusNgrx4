@@ -40,7 +40,6 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
 
     case contactsActions.SEARCH: {
       const searchFilters: ContactFilter = payload;
-     debugger;
       if (!searchFilters.searchText) {
         
         const newContacts = Object.keys(state.entities)
@@ -104,7 +103,6 @@ export const selectAllContacts = (state: any) => Object.keys(state.entities).map
 
 export const selectMatchingContacts = createSelector(getContactEntities, getMatchingContactIds,
    (allContacts, matchingIds: string[]) => {
-     debugger;
     if (!matchingIds) {
     //loading active ONLY for the initialise status
     return Object.keys(allContacts).map(key => allContacts[key]).filter(c=>!c.isPending);

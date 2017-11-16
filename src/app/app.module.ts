@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from './app-material.module';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -25,7 +27,11 @@ import { TestComponent } from './test/test.component';
   imports: [
     BrowserModule,
     FormsModule,
-    MaterialModule,
+    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
+    // MatButtonModule,
+    // MatTableModule,
+    //MaterialModule,
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(fromRoot.reducers), /* Initialise the Central Store with Application's main reducer*/

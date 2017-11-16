@@ -1,22 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewChild, OnInit} from '@angular/core';
 import { Contact , ContactFilter} from '@app-core/models';
-import { Observable } from 'rxjs/Observable';
+
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { MatPaginator } from "@angular/material";
 
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
+//import { ContactsDatasource, ContactsDatabase } from './contacts.datasource';
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
 import { Subscription } from 'rxjs/Subscription'
 
+import { CollectionViewer, DataSource } from '@angular/cdk/collections'
+
+
 import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
 
-import { ContactsDatasource } from './contacts.datasource'
-//import { MatPaginator, MatSort, MatTableDataSource , MatTableModule } from "@angular/material"
-import { MatPaginator, MatSort, PageEvent, Sort } from '@angular/material'
+
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
+
+
+//import { MatPaginator , MatTable, MatSort} from '@angular/material';
 
 
 
@@ -28,54 +43,39 @@ import { MatPaginator, MatSort, PageEvent, Sort } from '@angular/material'
 })
 
 export class ContactsIndexComponent implements OnInit {
-   displayedColumns = ['id', 'name', 'email', 'ph'];
-   dataSource: ContactsDatasource;
-  
+   displayedColumns = ['id', 'name', 'email', 'phone'];
+   
    contactFilter$: ContactFilter = {
      searchText:'',
      isPending: false,
    }
 
-   allContacts$: Observable<Contact[]>;
-   filteredContacts$: Observable<Contact[]>;
-   loading$: Observable<boolean>;
-   error$: Observable<string>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+   public contacts$: Observable<Contact[]>;
+   //contactsDatabase : ContactsDatabase;
+   contactsDatabase: ContactsDatabase;
+   dataSource : ContactsDataSource;
+   @ViewChild(MatPaginator) paginator: MatPaginator;
+ 
 
   private paginatorSubscription: Subscription = Subscription.EMPTY
   private sortSubscription: Subscription = Subscription.EMPTY
-  
   
   constructor(
       public store: Store<fromContacts.State>, 
       private router: Router, 
       private actR: ActivatedRoute) {
 
-      this.allContacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
-   }
+      //this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+     // this.contactsDatabase = new ContactsDatabase(store);
+     
+    }
 
   ngOnInit() {
-    // getAllContacts selector from the main store allows us to monitor changes only on id list from the main state
-    // without monitoring the rest of the state
-    //this.contacts$ = this.store.select(fromContacts.getAllContacts);
+    
     
     this.store.dispatch(new contactsActions.LoadAll());
-    //this.allContacts$.map(each=>each.filter(c=>c.isPending));
-    //this.contacts$ = this.store.select(state => selectAllActiveContacts(state.contacts.contacts));
-    // this.paginatorSubscription = this.paginator.page.subscribe((pageEvent: PageEvent) => {
-    //   this.store.dispatch(new contactsActions.LoadAll());
-    //   //pageEvent.pageIndex, pageEvent.pageSize
-    // })
-   
-    // this.sortSubscription = this.sort.sortChange.subscribe((sort: Sort) => {
-    //   // in case of sorting start with page 1 (pageIndex=0)
-    // //his.store.dispatch(new contactsActions.LoadAll(0, this.paginator.pageSize || 25, sort.active, sort.direction))
-
-    // })
-
-    // this.dataSource = new ContactsDatasource(this.contacts$);
+    this.contactsDatabase = new ContactsDatabase(this.store);
+    this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator);
   }
   
   searchContacts(event: ContactFilter) {
@@ -97,5 +97,62 @@ export class ContactsIndexComponent implements OnInit {
     if (r) {
       this.store.dispatch(new contactsActions.Delete(contact.id));
     }
+  }
+}
+
+export class ContactsDatabase {
+  constructor(private store: Store<fromContacts.State>) {
+
+  }
+
+    getRepoIssues(): Observable<Contact[]> {
+   
+        return this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+  }
+}
+
+
+
+export class ContactsDataSource extends DataSource<any> {
+  resultsLength = 0;
+  isLoadingResults = false;
+  isRateLimitReached = false;
+
+  public constructor(private _contactsDatabase: ContactsDatabase, private paginator: MatPaginator) {
+    super()
+  }
+
+  connect(): Observable<Contact[]> {
+    const displayDataChanges = [
+     // this.sort.sortChange,
+      this.paginator.page
+    ];
+
+    // If the user changes the sort order, reset back to the first page.
+   // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    return Observable.merge(...displayDataChanges)
+      .startWith(null)
+      .switchMap(() => {
+        this.isLoadingResults = true;
+        return this._contactsDatabase.getRepoIssues()
+      })
+      .map(data => {
+        // Flip flag to show that loading has finished.
+        this.isLoadingResults = false;
+        this.isRateLimitReached = false;
+        this.resultsLength = data.length;
+
+        return data;
+      })
+      .catch(() => {
+        this.isLoadingResults = false;
+        // Catch if the GitHub API has reached its rate limit. Return empty data.
+        this.isRateLimitReached = true;
+        return Observable.of([]);
+      });
+  }
+
+  public disconnect(): void {
   }
 }
