@@ -10,7 +10,7 @@ import { ContactsIndexComponent } from './contacts-index/contacts-index.componen
 
 
 import { MatButtonModule, MatTableModule } from '@angular/material';
-import {MatPaginatorModule} from '@angular/material';
+import {MatPaginatorModule, MatSortModule } from '@angular/material';
 
 import { SharedModule } from '@app-core/modules/shared.module';
 import { ContactsRoutingModule } from './contacts-routing.module';
@@ -28,6 +28,7 @@ import { initialState } from './store/reducers/search'
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     CommonModule,
     SharedModule,
     ContactsRoutingModule,

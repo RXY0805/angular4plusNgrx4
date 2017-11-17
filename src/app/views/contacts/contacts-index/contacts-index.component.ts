@@ -4,7 +4,7 @@ import { Contact , ContactFilter} from '@app-core/models';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MatPaginator } from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
 
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
@@ -55,7 +55,7 @@ export class ContactsIndexComponent implements OnInit {
    dataSource : ContactsDataSource;
 
    @ViewChild(MatPaginator) paginator: MatPaginator;
- 
+   @ViewChild(MatSort) sort: MatSort;
 
   private paginatorSubscription: Subscription = Subscription.EMPTY
   private sortSubscription: Subscription = Subscription.EMPTY
@@ -64,9 +64,6 @@ export class ContactsIndexComponent implements OnInit {
       public store: Store<fromContacts.State>, 
       private router: Router, 
       private actR: ActivatedRoute) {
-
-      
-     // this.contactsDatabase = new ContactsDatabase(store);
      
     }
 
@@ -75,7 +72,7 @@ export class ContactsIndexComponent implements OnInit {
     this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
     this.contactsDatabase = new ContactsDatabase(this.contacts$);
-    this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator);
+    this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
   }
   
   searchContacts(event: ContactFilter) {
@@ -132,7 +129,7 @@ export class ContactsDatabase {
 export class ContactsDataSource extends DataSource<any> {
   
 
-  public constructor(private _contactsDatabase: ContactsDatabase, private _paginator: MatPaginator) {
+  public constructor(private _contactsDatabase: ContactsDatabase, private _paginator: MatPaginator, private _sort: MatSort) {
     super()
   }
 
@@ -140,15 +137,41 @@ export class ContactsDataSource extends DataSource<any> {
     const displayDataChanges = [
       this._contactsDatabase.dataChange,
       this._paginator.page,
+      this._sort.sortChange,
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
       const data = this._contactsDatabase.data.slice();
 
+      const sortedData = this.sortData(data.slice());
+
+      
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-           return data.splice(startIndex, this._paginator.pageSize);
+           return sortedData.splice(startIndex, this._paginator.pageSize);
     });
   }
+
   public disconnect(): void {
+  }
+
+  sortData(data: Contact[]): Contact[] {
+    if (!this._sort.active || this._sort.direction == '') { return data; }
+
+    return data.sort((a, b) => {
+      let propertyA: number|string = '';
+      let propertyB: number|string = '';
+
+      switch (this._sort.active) {
+        
+        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
+       // case 'email': [propertyA, propertyB] = [a.email, b.email]; break;
+       
+      }
+
+      let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+      let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+
+      return (valueA < valueB ? -1 : 1) * (this._sort.direction == 'asc' ? 1 : -1);
+    });
   }
 }
