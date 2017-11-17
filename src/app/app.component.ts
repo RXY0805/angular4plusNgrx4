@@ -7,11 +7,19 @@ import {Store} from '@ngrx/store';
   selector: 'app-root',
   // Remove navigation toolbar 
   // <app-toolbar [title]="currentPageTitle$ | async" ></app-toolbar>
-  template: `      
-    <div class="container">
-      <button mat-button routerLink="/contacts">Go to contacts</button>
+  template: ` 
+  <!DOCTYPE html>
+  <html>
+  <head>
+  
+  </head>
+  <body>   
+    <div class="mat-app-background">
+      <button mat-button routerLink="/contractors">Go to contacts</button>
       <router-outlet></router-outlet>
     </div>
+    </body>
+    </html>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

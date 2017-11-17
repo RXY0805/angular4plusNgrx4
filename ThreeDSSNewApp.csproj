@@ -80,7 +80,7 @@
     <Content Include="src\app\views\contacts\contacts-index\contacts-index.component.sass" />
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\assets\data\company.json" />
-    <Content Include="src\styles.sass" />
+    <Content Include="src\styles.sass" /> 
     <Content Include="src\tsconfig.app.json" />
     <Content Include="src\tsconfig.spec.json" />
     <None Include="Web.Debug.config">

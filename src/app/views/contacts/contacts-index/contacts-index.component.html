@@ -25,15 +25,11 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <mat-paginator #paginator
-                [length]="contactsDatabase.data.length"
-                [pageIndex]="0"
-                [pageSize]="10"
-                [pageSizeOptions]="[5, 10, 25, 100]"> 
-        </mat-paginator>
+     
 </mat-table>
-<!-- <app-contact-list [contacts]="allContacts$ | async"
-                  (onShow)="showContact($event)"
-                  (onDelete)="deleteContact($event)"
-                  (onEdit)="editContact($event)"
-></app-contact-list> -->
+<mat-paginator #paginator
+        [length]="contactsDatabase.data.length"
+        [pageIndex]="0"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]"> 
+</mat-paginator>
