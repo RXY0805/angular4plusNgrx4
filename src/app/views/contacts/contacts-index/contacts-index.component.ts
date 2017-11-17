@@ -9,7 +9,6 @@ import { MatPaginator, MatSort } from "@angular/material";
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
-//import { ContactsDatasource, ContactsDatabase } from './contacts.datasource';
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
@@ -29,11 +28,6 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-
-
-//import { MatPaginator , MatTable, MatSort} from '@angular/material';
-
-
 
 @Component({
   selector: 'app-contacts-index',
@@ -117,12 +111,8 @@ export class ContactsDatabase {
 
      items.subscribe(res=>{
        this.setData(res);
-      // this.dataStore.contacts = data;
-       //this.dataChange.next(Object.assign({}, this.dataStore).contacts);
      }, error=>console.log('could not load contacts'));
-     
   }
-
 }
 
 
@@ -143,13 +133,10 @@ export class ContactsDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       const data = this._contactsDatabase.data.slice();
-
       const sortedData = this.sortData(data.slice());
-
-      
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-           return this.renderedData;
+      return this.renderedData;
     });
   }
 
@@ -167,7 +154,6 @@ export class ContactsDataSource extends DataSource<any> {
         
         case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
        // case 'email': [propertyA, propertyB] = [a.email, b.email]; break;
-       
       }
 
       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
