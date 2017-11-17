@@ -128,6 +128,7 @@ export class ContactsDatabase {
 
 export class ContactsDataSource extends DataSource<any> {
   
+  renderedData: Contact[] = [];
 
   public constructor(private _contactsDatabase: ContactsDatabase, private _paginator: MatPaginator, private _sort: MatSort) {
     super()
@@ -147,7 +148,8 @@ export class ContactsDataSource extends DataSource<any> {
 
       
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-           return sortedData.splice(startIndex, this._paginator.pageSize);
+      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+           return this.renderedData;
     });
   }
 
