@@ -51,9 +51,9 @@ export class ContactsIndexComponent implements OnInit {
    }
 
    public contacts$: Observable<Contact[]>;
-   //contactsDatabase : ContactsDatabase;
    contactsDatabase: ContactsDatabase;
    dataSource : ContactsDataSource;
+
    @ViewChild(MatPaginator) paginator: MatPaginator;
  
 
@@ -65,16 +65,16 @@ export class ContactsIndexComponent implements OnInit {
       private router: Router, 
       private actR: ActivatedRoute) {
 
-      //this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+      
      // this.contactsDatabase = new ContactsDatabase(store);
      
     }
 
   ngOnInit() {
     
-    
+    this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
-    this.contactsDatabase = new ContactsDatabase(this.store);
+    this.contactsDatabase = new ContactsDatabase(this.contacts$);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator);
   }
   
@@ -101,58 +101,54 @@ export class ContactsIndexComponent implements OnInit {
 }
 
 export class ContactsDatabase {
-  constructor(private store: Store<fromContacts.State>) {
 
+  dataChange: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]) ;
+  
+  private dataStore: {
+    contacts:  Contact[]
   }
 
-    getRepoIssues(): Observable<Contact[]> {
-   
-        return this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+  get data(): Contact[] {
+    return this.dataChange.value;
   }
+
+  setData(items: Contact[]){
+    this.dataChange.next(items);
+  }
+
+  constructor(items: Observable<Contact[]>) {
+
+     items.subscribe(res=>{
+       this.setData(res);
+      // this.dataStore.contacts = data;
+       //this.dataChange.next(Object.assign({}, this.dataStore).contacts);
+     }, error=>console.log('could not load contacts'));
+     
+  }
+
 }
 
 
-
 export class ContactsDataSource extends DataSource<any> {
-  resultsLength = 0;
-  isLoadingResults = false;
-  isRateLimitReached = false;
+  
 
-  public constructor(private _contactsDatabase: ContactsDatabase, private paginator: MatPaginator) {
+  public constructor(private _contactsDatabase: ContactsDatabase, private _paginator: MatPaginator) {
     super()
   }
 
   connect(): Observable<Contact[]> {
     const displayDataChanges = [
-     // this.sort.sortChange,
-      this.paginator.page
+      this._contactsDatabase.dataChange,
+      this._paginator.page,
     ];
 
-    // If the user changes the sort order, reset back to the first page.
-   // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    return Observable.merge(...displayDataChanges).map(() => {
+      const data = this._contactsDatabase.data.slice();
 
-    return Observable.merge(...displayDataChanges)
-      .startWith(null)
-      .switchMap(() => {
-        this.isLoadingResults = true;
-        return this._contactsDatabase.getRepoIssues()
-      })
-      .map(data => {
-        // Flip flag to show that loading has finished.
-        this.isLoadingResults = false;
-        this.isRateLimitReached = false;
-        this.resultsLength = data.length;
-
-        return data;
-      })
-      .catch(() => {
-        this.isLoadingResults = false;
-        // Catch if the GitHub API has reached its rate limit. Return empty data.
-        this.isRateLimitReached = true;
-        return Observable.of([]);
-      });
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+           return data.splice(startIndex, this._paginator.pageSize);
+    });
   }
-
   public disconnect(): void {
   }
 }

@@ -40,7 +40,6 @@ export class ContactsDatasource extends DataSource<Contact> {
     return Observable.merge(...displayDataChanges).map(() => {
       const data = this._contactsDatabase.data.slice();
 
-      // Grab the page's slice of data.
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
       return data.splice(startIndex, this._paginator.pageSize);
     });
