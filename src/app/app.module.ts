@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { SharedModule } from './core/modules/shared.module';
+//import { SharedModule } from './core/modules/shared.module';
 
 import * as fromRoot from '@app-root-store';
 import { TestComponent } from './test/test.component';
@@ -33,7 +33,7 @@ import { TestComponent } from './test/test.component';
     // MatTableModule,
     //MaterialModule,
     AppRoutingModule,
-    SharedModule,
+    //SharedModule,
     StoreModule.forRoot(fromRoot.reducers), /* Initialise the Central Store with Application's main reducer*/
     EffectsModule.forRoot([]), /* Start monitoring app's side effects */
     StoreDevtoolsModule.instrument({ maxAge: 50 })

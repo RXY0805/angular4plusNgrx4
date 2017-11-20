@@ -16,7 +16,8 @@ export class ContactFormComponent implements OnInit, OnChanges {
     name: '',
     email: '',
     phone: '',
-    isPending: false
+    isPending: false,
+    projectId: null,
   };
 
   @Output() onSubmit = new EventEmitter<Contact>();
@@ -30,6 +31,7 @@ export class ContactFormComponent implements OnInit, OnChanges {
       'email': [this.contact.email, Validators.required],
       'phone': [this.contact.phone],
       'isPending': [this.contact.isPending],
+      'projectId': [this.contact.projectId],
     })
   }
 

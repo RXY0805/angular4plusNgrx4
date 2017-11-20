@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild, OnInit} from '@angular/core';
-import { Contact , ContactFilter} from '@app-core/models';
+import { Contact , ContactFilter, Project} from '@app-core/models';
 
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -42,9 +42,13 @@ export class ContactsIndexComponent implements OnInit {
    contactFilter$: ContactFilter = {
      searchText:'',
      isPending: false,
+     selectedProjectId: 0,
    }
-
+   
+   public currentProject$: Project;
+   public projects$: Project[];
    public contacts$: Observable<Contact[]>;
+   public invitingExistContacts$: Observable<Contact[]>;
    contactsDatabase: ContactsDatabase;
    dataSource : ContactsDataSource;
 
@@ -62,7 +66,9 @@ export class ContactsIndexComponent implements OnInit {
     }
 
   ngOnInit() {
-    
+    this.projects$ =[{id:1, name:'aaa'},{id:2, name:'bbb'},{id:3, name:'ccc'}];
+   
+    //this.contactFilter$.selectedProjectId = this.projects$[0].id;
     this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
     this.contactsDatabase = new ContactsDatabase(this.contacts$);
@@ -70,6 +76,9 @@ export class ContactsIndexComponent implements OnInit {
   }
   
   searchContacts(event: ContactFilter) {
+    this.currentProject$ = this.projects$.filter(r=>r.id == this.contactFilter$.selectedProjectId)[0];
+    //this.invitingExistContacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+
     this.store.dispatch(new contactsActions.Search(event));
   }
 

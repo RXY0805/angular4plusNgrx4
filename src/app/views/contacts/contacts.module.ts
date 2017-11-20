@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 import { ContactsComponent } from './contacts.component';
@@ -9,8 +10,13 @@ import { ContactNewComponent } from './contact-new/contact-new.component';
 import { ContactsIndexComponent } from './contacts-index/contacts-index.component';
 
 
+
 import { MatButtonModule, MatTableModule } from '@angular/material';
-import {MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+//import { MatFormFieldModule } from '@angular/material';
+//import { MatInputModule } from '@angular/material';
+
 
 import { SharedModule } from '@app-core/modules/shared.module';
 import { ContactsRoutingModule } from './contacts-routing.module';
@@ -24,11 +30,15 @@ import { initialState } from './store/reducers/search'
 
 @NgModule({
   imports: [
-   // BrowserAnimationsModule,
+    // BrowserAnimationsModule,
+    FormsModule,
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
+    //MatFormFieldModule,
+    //MatInputModule,
     CommonModule,
     SharedModule,
     ContactsRoutingModule,

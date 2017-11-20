@@ -22,7 +22,7 @@ export const contactsAdapter = createEntityAdapter<Contact>({
 export interface State extends EntityState<Contact> {
   currentContactId?: string,
   displayedContactListIds?: string[],
-  
+
 }
 
 export const INIT_STATE: State = contactsAdapter.getInitialState({
@@ -40,29 +40,19 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
 
     case contactsActions.SEARCH: {
       const searchFilters: ContactFilter = payload;
-      if (!searchFilters.searchText) {
-        
-        const newContacts = Object.keys(state.entities)
-          .map(key => state.entities[key])
-          .filter(contact => contact.isPending == searchFilters.isPending)
-          .map(contact => contact.id);
-  
-        return {
-          ...state,
-          displayedContactListIds: newContacts
-        }
-      }
-      else{
-        const newContacts = Object.keys(state.entities)
-          .map(key => state.entities[key])
-          .filter(contact => contact.name.toLowerCase().includes(searchFilters.searchText.toLowerCase()))
-          .filter(contact => contact.isPending == searchFilters.isPending)
-          .map(contact => contact.id);
-  
-        return {
-          ...state,
-          displayedContactListIds: newContacts
-        }
+
+      const newContacts = Object.keys(state.entities)
+        .map(key => state.entities[key])
+        .filter(contact => contact.isPending == searchFilters.isPending)
+        .filter(contact => searchFilters.searchText.trim().length === 0 
+            || contact.name.toLowerCase().includes(searchFilters.searchText.toLowerCase()))
+        .filter(contact => searchFilters.selectedProjectId === 0 
+            || contact.projectId == searchFilters.selectedProjectId)
+        .map(contact => contact.id);
+
+      return {
+        ...state,
+        displayedContactListIds: newContacts
       }
     }
 
@@ -102,12 +92,11 @@ export const getContactEntities = (state: State) => state.entities;
 export const selectAllContacts = (state: any) => Object.keys(state.entities).map(key => state.entities[key]);
 
 export const selectMatchingContacts = createSelector(getContactEntities, getMatchingContactIds,
-   (allContacts, matchingIds: string[]) => {
-    if (!matchingIds) {
-    //loading active ONLY for the initialise status
-    return Object.keys(allContacts).map(key => allContacts[key]).filter(c=>!c.isPending);
-  } else {
-    return matchingIds.map(x => allContacts[x]);
-  }
-});
+  (allContacts, matchingIds: string[]) => 
+    !matchingIds
+      ? Object.keys(allContacts)
+        .map(key => allContacts[key])
+        .filter(c => !c.isPending)
+      : matchingIds.map(x => allContacts[x])
+  );
 

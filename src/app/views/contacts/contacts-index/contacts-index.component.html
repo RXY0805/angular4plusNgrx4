@@ -1,6 +1,8 @@
 <h1> Contact list</h1>
 
-<app-contact-search [contactFilter]="contactFilter$" (onSearch)="searchContacts($event)" ></app-contact-search>
+<app-contact-search [projects]="projects$" [contactFilter]="contactFilter$" (onSearch)="searchContacts($event)" ></app-contact-search>
+
+<app-contact-invite [currentProject]="currentProject$"></app-contact-invite>
 
 <mat-table  [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">
@@ -22,7 +24,6 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-     
 </mat-table>
 <mat-paginator #paginator
         [length]="contactsDatabase.data.length"
