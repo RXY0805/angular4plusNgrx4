@@ -13,10 +13,6 @@ import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
 
 
-
-
-
-
 import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
 
 
@@ -24,6 +20,7 @@ import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-re
  import {Observable} from 'rxjs/Observable';
  import 'rxjs/add/operator/filter';
  import { Subscription } from 'rxjs/Subscription'
+
 
 @Component({
   selector: 'app-contacts-index',
@@ -33,7 +30,7 @@ import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-re
 })
 
 export class ContactsIndexComponent implements OnInit {
-   displayedColumns = ['id', 'name', 'email', 'phone'];
+   displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
    
    contactFilter$: ContactFilter = {
      searchText:'',
@@ -63,18 +60,17 @@ export class ContactsIndexComponent implements OnInit {
 
   ngOnInit() {
     this.projects$ =[{id:1, name:'aaa'},{id:2, name:'bbb'},{id:3, name:'ccc'}];
-   
-    //this.contactFilter$.selectedProjectId = this.projects$[0].id;
+    this.contactFilter$.selectedProjectId = this.projects$[0].id;
     this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+    
     this.store.dispatch(new contactsActions.LoadAll());
+    //this.store.dispatch(new contactsActions.Search(this.contactFilter$));
     this.contactsDatabase = new ContactsDatabase(this.contacts$);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
   }
   
   searchContacts(event: ContactFilter) {
     this.currentProject$ = this.projects$.filter(r=>r.id == this.contactFilter$.selectedProjectId)[0];
-    //this.invitingExistContacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
-
     this.store.dispatch(new contactsActions.Search(event));
   }
 

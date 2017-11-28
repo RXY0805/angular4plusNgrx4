@@ -1,11 +1,11 @@
 
 import { CollectionViewer, DataSource } from '@angular/cdk/collections'
-import { Contact , ContactFilter, Project} from '@app-core/models';
+import { Contact , ContactFilter, Project } from '@app-core/models';
 
 import { MatPaginator, MatSort } from "@angular/material";
 
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';

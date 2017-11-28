@@ -26,7 +26,6 @@ export class ContactInviteComponent {
             data: { projectId: this.currentProject.id, projectName: this.currentProject.name }
           });
     
-
     dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
        // this.projectName = result;
@@ -42,7 +41,8 @@ export class ContactInviteComponent {
     
 
     constructor(
-      public dialogRef: MatDialogRef<ContactInviteDialog>,@Inject(MAT_DIALOG_DATA) public data: any) { }
+      public dialogRef: MatDialogRef<ContactInviteDialog>, 
+      @Inject(MAT_DIALOG_DATA) public data: any) { }
   
     onNoClick(): void {
       this.dialogRef.close();

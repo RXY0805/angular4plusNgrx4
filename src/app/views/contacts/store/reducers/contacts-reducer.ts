@@ -22,7 +22,6 @@ export const contactsAdapter = createEntityAdapter<Contact>({
 export interface State extends EntityState<Contact> {
   currentContactId?: string,
   displayedContactListIds?: string[],
-
 }
 
 export const INIT_STATE: State = contactsAdapter.getInitialState({
@@ -44,9 +43,9 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
       const newContacts = Object.keys(state.entities)
         .map(key => state.entities[key])
         .filter(contact => contact.isPending == searchFilters.isPending)
-        .filter(contact => searchFilters.searchText.trim().length === 0 
+        .filter(contact => !searchFilters.searchText.trim().length
             || contact.name.toLowerCase().includes(searchFilters.searchText.toLowerCase()))
-        .filter(contact => searchFilters.selectedProjectId === 0 
+        .filter(contact => !searchFilters.selectedProjectId 
             || contact.projectId == searchFilters.selectedProjectId)
         .map(contact => contact.id);
 
@@ -92,7 +91,7 @@ export const getContactEntities = (state: State) => state.entities;
 export const selectAllContacts = (state: any) => Object.keys(state.entities).map(key => state.entities[key]);
 
 export const selectMatchingContacts = createSelector(getContactEntities, getMatchingContactIds,
-  (allContacts, matchingIds: string[]) => 
+  (allContacts, matchingIds: string[],) => 
     !matchingIds
       ? Object.keys(allContacts)
         .map(key => allContacts[key])
