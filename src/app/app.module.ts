@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
+import { ContactsModule } from './views/contacts/contacts.module'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,11 +29,8 @@ import { TestComponent } from './test/test.component';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    // BrowserAnimationsModule,
-    // MatButtonModule,
-    // MatTableModule,
-    //MaterialModule,
     AppRoutingModule,
+    ContactsModule,
     //SharedModule,
     StoreModule.forRoot(fromRoot.reducers), /* Initialise the Central Store with Application's main reducer*/
     EffectsModule.forRoot([]), /* Start monitoring app's side effects */

@@ -6,12 +6,12 @@ import { ContactsDatabase, ContactsDataSource } from './contacts.datasource';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 import { MatPaginator, MatSort } from "@angular/material";
 
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
-
 
 import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
 

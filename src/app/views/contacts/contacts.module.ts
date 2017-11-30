@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '@app-core/modules/shared.module';
 
+import { ContactsRoutingModule } from './contacts-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { AppMaterialModule } from '../../app-material.module';
 
 import { ContactsComponent } from './contacts.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
@@ -9,18 +13,6 @@ import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { ContactNewComponent } from './contact-new/contact-new.component';
 import { ContactsIndexComponent } from './contacts-index/contacts-index.component';
 
-
-
-import { MatButtonModule, MatTableModule } from '@angular/material';
-import { MatPaginatorModule, MatSortModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material';
-//import { MatFormFieldModule } from '@angular/material';
-//import { MatInputModule } from '@angular/material';
-
-
-import { SharedModule } from '@app-core/modules/shared.module';
-import { ContactsRoutingModule } from './contacts-routing.module';
-import { StoreModule } from '@ngrx/store';
 
 import * as fromContacts from './store'
 import { EffectsModule } from '@ngrx/effects';
@@ -30,16 +22,9 @@ import { initialState } from './store/reducers/search'
 
 @NgModule({
   imports: [
-    // BrowserAnimationsModule,
     FormsModule,
-    MatButtonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
-    //MatFormFieldModule,
-    //MatInputModule,
     CommonModule,
+    AppMaterialModule,
     SharedModule,
     ContactsRoutingModule,
     StoreModule.forFeature('contacts', fromContacts.reducers),
@@ -51,7 +36,6 @@ import { initialState } from './store/reducers/search'
     ContactEditComponent,
     ContactNewComponent,
     ContactsIndexComponent,
-
   ]
 })
 export class ContactsModule { }
