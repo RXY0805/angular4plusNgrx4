@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewChild, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Contact , ContactFilter, Project} from '@app-core/models';
 
-import { ContactsDatabase, ContactsDataSource } from './contacts.datasource';
+
 
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
-import { MatPaginator, MatSort } from "@angular/material";
+
 
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
@@ -15,11 +15,8 @@ import * as fromRoot from '@app-root-store';
 
 import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-reducer';
 
+import {Observable} from 'rxjs/Observable';
 
-
- import {Observable} from 'rxjs/Observable';
- import 'rxjs/add/operator/filter';
- import { Subscription } from 'rxjs/Subscription'
 
 
 @Component({
@@ -31,7 +28,7 @@ import { selectMatchingContacts } from '@app-contacts-store/reducers/contacts-re
 
 export class ContactsIndexComponent implements OnInit {
    displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
-   
+   public contacts$: Observable<Contact[]>;
    contactFilter$: ContactFilter = {
      searchText:'',
      isPending: false,
@@ -40,16 +37,8 @@ export class ContactsIndexComponent implements OnInit {
    
    public currentProject$: Project;
    public projects$: Project[];
-   public contacts$: Observable<Contact[]>;
-   public invitingExistContacts$: Observable<Contact[]>;
-   public contactsDatabase: ContactsDatabase;
-   public dataSource : ContactsDataSource;
+ 
 
-   @ViewChild(MatPaginator) paginator: MatPaginator;
-   @ViewChild(MatSort) sort: MatSort;
-
-  private paginatorSubscription: Subscription = Subscription.EMPTY
-  private sortSubscription: Subscription = Subscription.EMPTY
   
   constructor(
       public store: Store<fromContacts.State>, 
@@ -65,8 +54,7 @@ export class ContactsIndexComponent implements OnInit {
     
     this.store.dispatch(new contactsActions.LoadAll());
     //this.store.dispatch(new contactsActions.Search(this.contactFilter$));
-    this.contactsDatabase = new ContactsDatabase(this.contacts$);
-    this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
+    
   }
   
   searchContacts(event: ContactFilter) {

@@ -64,7 +64,6 @@ export class ContactSearchComponent {
   
 
   triggerFilter(value) {
-    debugger;
     this.onSearch.emit(this.contactFilter);
   }
  

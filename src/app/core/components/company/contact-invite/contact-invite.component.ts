@@ -20,7 +20,6 @@ export class ContactInviteComponent {
     }
 
     openDialog(): void {
-        debugger;
         let dialogRef = this.dialog.open(ContactInviteDialog, {
             width: '250px',
             data: { projectId: this.currentProject.id, projectName: this.currentProject.name }
