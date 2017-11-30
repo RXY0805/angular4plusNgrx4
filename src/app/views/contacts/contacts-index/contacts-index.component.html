@@ -4,7 +4,13 @@
 
 <app-contact-invite [currentProject]="currentProject$"></app-contact-invite>
 
-<mat-table  [dataSource]="dataSource" matSort>
+<div>
+        hello world
+</div>
+<div>
+        <app-example></app-example>
+</div>
+<!-- <mat-table  [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
                 <mat-cell *matCellDef="let contact"> {{contact.id}} </mat-cell>
@@ -33,4 +39,4 @@
         [pageIndex]="0"
         [pageSize]="10"
         [pageSizeOptions]="[5, 10, 25, 100]"> 
-</mat-paginator>
+</mat-paginator> -->

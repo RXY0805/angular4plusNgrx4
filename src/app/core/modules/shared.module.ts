@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { SelectModule } from 'angular2-select';
 
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+//import { MatFormFieldModule, MatInputModule, MatTableModule } from '@angular/material';
+import { AppMaterialModule } from '../../app-material.module';
 
 
+import {Example} from '../components/company/example';
 
 import { ContactListComponent } from '../components/company/contact-list/contact-list.component';
 import { ContactFormComponent } from '../components/company/contact-form/contact-form.component';
@@ -31,8 +33,7 @@ import { TitleResolver } from '../resolvers/title.resolver';
     HttpClientModule,
     RouterModule,
     FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
+    AppMaterialModule
   ],
   declarations: [
     ContactListComponent,
@@ -41,7 +42,8 @@ import { TitleResolver } from '../resolvers/title.resolver';
     ContactSearchComponent,
     ContactInviteComponent,
     ContactInviteDialog,
-    ToolbarComponent
+    ToolbarComponent,
+    Example
   ],
   exports: [
     ContactListComponent,
@@ -51,7 +53,8 @@ import { TitleResolver } from '../resolvers/title.resolver';
     ContactInviteComponent,
     ContactInviteDialog,
     RouterModule,
-    ToolbarComponent
+    ToolbarComponent,
+    Example
   ],
   //entryComponents: [ContactInviteComponent, ContactInviteDialog],
   bootstrap:[ContactInviteComponent, ContactInviteDialog],

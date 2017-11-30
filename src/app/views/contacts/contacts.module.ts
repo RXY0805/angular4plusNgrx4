@@ -5,7 +5,6 @@ import { SharedModule } from '@app-core/modules/shared.module';
 
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { AppMaterialModule } from '../../app-material.module';
 
 import { ContactsComponent } from './contacts.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
@@ -24,7 +23,6 @@ import { initialState } from './store/reducers/search'
   imports: [
     FormsModule,
     CommonModule,
-    AppMaterialModule,
     SharedModule,
     ContactsRoutingModule,
     StoreModule.forFeature('contacts', fromContacts.reducers),
