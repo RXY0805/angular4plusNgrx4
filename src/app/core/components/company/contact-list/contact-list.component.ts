@@ -19,6 +19,8 @@ export class ContactListComponent implements OnInit {
   public displayedColumns ;
   public contactsDatabase: ContactsDatabase;
   public dataSource : ContactsDataSource;
+  public defaultPageSize: number;
+  public invitedContactIds: string[]=[];
 
   @Input() contacts: Observable<Contact[]>;
   @Input() isCheckable: boolean;
@@ -35,12 +37,29 @@ export class ContactListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.defaultPageSize = this.isCheckable ? 5:10;
     this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending', 'projectId'];
     this.contactsDatabase = new ContactsDatabase(this.contacts);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
   }
 
+  toggleInviteContact(contactId) {
+   
+    var index = -1;
 
+    if(this.invitedContactIds){
+      index = this.invitedContactIds.indexOf(contactId);
+    }
+    
+    if(index <0){
+      this.invitedContactIds.push(contactId);
+    }
+    else{
+      this.invitedContactIds.splice(index,1);
+    }
+  }
+
+  
   // showDetails(contact: Contact) {
   //   this.onShow.emit(contact);
   // }

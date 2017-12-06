@@ -5,6 +5,7 @@ import {
   
   MatButtonModule,
   MatCheckboxModule,
+  MatTabsModule,
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
@@ -18,6 +19,7 @@ import {
     CommonModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -28,6 +30,7 @@ import {
   exports: [
     MatButtonModule,
     MatCheckboxModule,
+    MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

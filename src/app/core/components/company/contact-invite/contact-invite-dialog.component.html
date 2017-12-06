@@ -1,16 +1,17 @@
-<h1 mat-dialog-title>Hi </h1>
+<h1 mat-dialog-title>Invite Contractors to join project: {{data.projectName}} projectId: {{data.projectId}}</h1>
 <div mat-dialog-content>
  
-  <div>
-     Invite exist contractors to join  {{data.projectName}}
-  </div>
-  <div>
-     ProjectId:  {{data.projectId}}
- </div>
-
- <app-contact-list [contacts]="data.availableContacts" [isCheckable]="data.isCheckable" ></app-contact-list>
+ <mat-tab-group>
+    <mat-tab label="exist contracts">
+        <app-contact-list [contacts]="data.availableContacts" [isCheckable]="data.isCheckable" ></app-contact-list>
+    </mat-tab>
+    <mat-tab label="new contracts">
+        <div>new contract details</div>
+    </mat-tab>
+ </mat-tab-group>
+ 
 </div>
 <div mat-dialog-actions>
-  <!-- <button mat-button [mat-dialog-close]="data.projectName" >Ok</button> -->
-  <!-- <button mat-button (click)="onNoClick()" >No Thanks</button> -->
+  <button mat-button (click)="onNoClick()" >No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.projectName" >Invite</button>
 </div>
