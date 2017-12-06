@@ -36,7 +36,7 @@ export class ContactInviteComponent {
     openDialog(): void {
         let dialogRef = this.dialog.open(ContactInviteDialog, {
             width: '850px',
-            data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts$ }
+            data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts$, isCheckable: true }
           });
     
     dialogRef.afterClosed().subscribe(result => {

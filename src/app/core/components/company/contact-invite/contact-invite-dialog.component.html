@@ -7,7 +7,8 @@
   <div>
      ProjectId:  {{data.projectId}}
  </div>
- <app-contact-list [contacts]="data.availableContacts" ></app-contact-list>
+
+ <app-contact-list [contacts]="data.availableContacts" [isCheckable]="data.isCheckable" ></app-contact-list>
 </div>
 <div mat-dialog-actions>
   <!-- <button mat-button [mat-dialog-close]="data.projectName" >Ok</button> -->

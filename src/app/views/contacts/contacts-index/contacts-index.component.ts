@@ -27,6 +27,7 @@ export class ContactsIndexComponent implements OnInit {
    displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
    public contacts$: Observable<Contact[]>;
    public availableContacts$: Observable<Contact[]>;
+   public isCheckable$: boolean;
    contactFilter$: ContactFilter = {
      searchText:'',
      isPending: false,
@@ -48,6 +49,7 @@ export class ContactsIndexComponent implements OnInit {
   ngOnInit() {
     this.projects$ =[{id:1, name:'aaa'},{id:2, name:'bbb'},{id:3, name:'ccc'}];
     this.contactFilter$.selectedProjectId = this.projects$[0].id;
+    this.isCheckable$ = false;
     this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
     //this.store.dispatch(new contactsActions.Search(this.contactFilter$));

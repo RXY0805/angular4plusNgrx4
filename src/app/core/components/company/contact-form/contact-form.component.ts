@@ -18,6 +18,7 @@ export class ContactFormComponent implements OnInit, OnChanges {
     phone: '',
     isPending: false,
     projectId: null,
+    //isInvited: false,
   };
 
   @Output() onSubmit = new EventEmitter<Contact>();
@@ -32,6 +33,7 @@ export class ContactFormComponent implements OnInit, OnChanges {
       'phone': [this.contact.phone],
       'isPending': [this.contact.isPending],
       'projectId': [this.contact.projectId],
+      //'isInvited': [this.contact.isInvited],
     })
   }
 

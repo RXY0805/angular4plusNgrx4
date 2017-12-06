@@ -5,6 +5,7 @@ export interface Contact {
   phone?: string;
   isPending: boolean;
   projectId: number;
+  //isInvited: boolean;
 }
 
 export interface ContactFilter {
@@ -12,3 +13,5 @@ export interface ContactFilter {
   isPending: boolean;
   selectedProjectId: number;
 }
+
+

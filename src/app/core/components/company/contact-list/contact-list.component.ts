@@ -21,6 +21,7 @@ export class ContactListComponent implements OnInit {
   public dataSource : ContactsDataSource;
 
   @Input() contacts: Observable<Contact[]>;
+  @Input() isCheckable: boolean;
   // @Output() onEdit = new EventEmitter<Contact>();
   // @Output() onShow = new EventEmitter<Contact>();
   // @Output() onDelete = new EventEmitter<Contact>();
@@ -34,10 +35,9 @@ export class ContactListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.displayedColumns = ['id', 'name', 'email', 'phone','isPending','projectId'];
+    this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending', 'projectId'];
     this.contactsDatabase = new ContactsDatabase(this.contacts);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
-
   }
 
 
