@@ -22,6 +22,7 @@ export const contactsAdapter = createEntityAdapter<Contact>({
 export interface State extends EntityState<Contact> {
   currentContactId?: string,
   displayedContactListIds?: string[],
+  availableContactListId?: string[],
 }
 
 export const INIT_STATE: State = contactsAdapter.getInitialState({
@@ -49,9 +50,16 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
             || contact.projectId == searchFilters.selectedProjectId)
         .map(contact => contact.id);
 
+        const availableContacts = Object.keys(state.entities)
+        .map(key => state.entities[key])
+        .filter(contact => !searchFilters.selectedProjectId 
+            || contact.projectId != searchFilters.selectedProjectId)
+        .map(contact => contact.id);
+      
       return {
         ...state,
-        displayedContactListIds: newContacts
+        displayedContactListIds: newContacts,
+        availableContactListId: availableContacts,
       }
     }
 
@@ -86,7 +94,9 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
 
 export const getCurrentContactId = (state: State) => state.currentContactId;
 export const getMatchingContactIds = (state: State) => state.displayedContactListIds;
+export const getAvailableContactIds =(state: State) => state.availableContactListId;
 export const getContactEntities = (state: State) => state.entities;
+//export const getSelectedProjectId =(state:State) => state.selectedProjectId;
 
 export const selectAllContacts = (state: any) => Object.keys(state.entities).map(key => state.entities[key]);
 
@@ -99,3 +109,8 @@ export const selectMatchingContacts = createSelector(getContactEntities, getMatc
       : matchingIds.map(x => allContacts[x])
   );
 
+  export const getAvailableContacts = createSelector(getContactEntities, getAvailableContactIds,
+    (allContacts, matchingIds: string[]) => matchingIds.map(x => allContacts[x])
+     
+     
+    );

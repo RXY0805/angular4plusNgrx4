@@ -34,7 +34,7 @@ export class ContactListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
+    this.displayedColumns = ['id', 'name', 'email', 'phone','isPending','projectId'];
     this.contactsDatabase = new ContactsDatabase(this.contacts);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
 
