@@ -1,0 +1,15 @@
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+.newContractorForm {
+   
+    display: inline-block;
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}

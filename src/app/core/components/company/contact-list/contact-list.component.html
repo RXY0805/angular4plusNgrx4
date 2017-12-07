@@ -4,7 +4,7 @@
       
      
         <ng-container matColumnDef="id"  >
-                <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{isCheckable ? 'Tick': 'Id'}}  </mat-header-cell>
                 <mat-cell *matCellDef="let contact"> 
                                 <mat-checkbox [hidden]="!isCheckable"  (change)="toggleInviteContact(contact.id, $event)" [checked]="false">
 
@@ -28,10 +28,10 @@
                 <mat-header-cell *matHeaderCellDef> Active </mat-header-cell>
                 <mat-cell *matCellDef="let contact"> {{!contact.isPending}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="projectId">
+        <!-- <ng-container matColumnDef="projectId">
                 <mat-header-cell *matHeaderCellDef> ProjectId </mat-header-cell>
                 <mat-cell *matCellDef="let contact"> {{contact.projectId}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>

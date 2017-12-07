@@ -19,7 +19,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-contacts-index',
   templateUrl: './contacts-index.component.html',
-  styleUrls: ['./contacts-index.component.sass'],
+  styleUrls: ['./contacts-index.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

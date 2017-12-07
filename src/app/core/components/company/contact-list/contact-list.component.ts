@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription'
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
-  styleUrls: ['./contact-list.component.sass'],
+  styleUrls: ['./contact-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactListComponent implements OnInit {
@@ -38,7 +38,7 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
     this.defaultPageSize = this.isCheckable ? 5:10;
-    this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending', 'projectId'];
+    this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending'];
     this.contactsDatabase = new ContactsDatabase(this.contacts);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
   }

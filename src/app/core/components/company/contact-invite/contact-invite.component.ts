@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Observable} from 'rxjs/Observable';
 import { Component, Output, Input, EventEmitter, Inject, OnInit } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
 import { Store } from '@ngrx/store';
@@ -14,6 +15,7 @@ import { ContactFilter,Contact, Project } from '@app-core/models';
 
 @Component({
   selector: 'app-contact-invite',
+  // styleUrls: ['./contact-invite.component.css'],
   templateUrl: './contact-invite.component.html' ,
 })
 export class ContactInviteComponent {
@@ -35,7 +37,7 @@ export class ContactInviteComponent {
 
     openDialog(): void {
         let dialogRef = this.dialog.open(ContactInviteDialog, {
-            width: '850px',
+            width: '650px',
             data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts$, isCheckable: true }
           });
     
@@ -48,6 +50,7 @@ export class ContactInviteComponent {
 
 @Component({
     selector: 'contact-invite-dialog',
+    styleUrls: ['contact-invite-dialog.component.css'],
     templateUrl: 'contact-invite-dialog.component.html',
   })
   export class ContactInviteDialog {

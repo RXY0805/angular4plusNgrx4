@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  
+  MatCardModule,
   MatButtonModule,
   MatCheckboxModule,
   MatTabsModule,
@@ -17,6 +17,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
     MatTabsModule,
@@ -28,6 +29,7 @@ import {
     MatInputModule,
   ],
   exports: [
+    MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
     MatTabsModule,
