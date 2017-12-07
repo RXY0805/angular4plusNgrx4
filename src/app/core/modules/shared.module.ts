@@ -14,8 +14,8 @@ import { ContactListComponent } from '../components/company/contact-list/contact
 import { ContactFormComponent } from '../components/company/contact-form/contact-form.component';
 import { ContactDetailsContainerComponent } from '../components/company/contact-details/contact-details-container.component';
 import { ContactSearchComponent } from '../components/company/contact-search/contact-search.component';
-import { ContactInviteComponent, ContactInviteDialog } from '../components/company/contact-invite/contact-invite.component';
-
+import { ContactInviteComponent } from '../components/company/contact-invite/contact-invite.component';
+import { ContactInviteDialog } from '../components/company/contact-invite/contact-invite-dialog.component';
 
 import { ContactsService } from '../services/contacts.service';
 
