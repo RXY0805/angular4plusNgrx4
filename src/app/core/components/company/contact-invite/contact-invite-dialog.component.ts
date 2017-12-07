@@ -11,13 +11,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
   export class ContactInviteDialog {
     public noneContractInvited: boolean;
 
-    noneInvited(){
-       return this.noneContractInvited;
-    }
     emailFormControl = new FormControl('', [
         Validators.required,
         Validators.email,
       ]);
+
     
     constructor(public dialogRef: MatDialogRef<ContactInviteDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { 
         this.noneContractInvited = true;

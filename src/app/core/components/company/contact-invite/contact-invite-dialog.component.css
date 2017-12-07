@@ -13,3 +13,9 @@
 .full-width {
     width: 100%;
 }
+
+.mat-button-right .button-group {
+    position: absolute;
+    right: 0px;
+    margin: 0;
+  }
