@@ -2,13 +2,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
-
-
-
-
 import { ContactFilter, Project } from '@app-core/models';
-
-
 
 @Component({
   selector: 'app-contact-search',
@@ -52,9 +46,6 @@ import { ContactFilter, Project } from '@app-core/models';
 })
 export class ContactSearchComponent {
 
-  
-  
-
   @Input() contactFilter: ContactFilter
   @Input() projects: Project[]
 
@@ -66,5 +57,4 @@ export class ContactSearchComponent {
   triggerFilter(value) {
     this.onSearch.emit(this.contactFilter);
   }
- 
 }

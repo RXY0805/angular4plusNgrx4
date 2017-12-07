@@ -29,10 +29,6 @@ export class ContactInviteComponent {
     ngOnInit() {
   
       this.availableContacts$ = this.store.select(state => getAvailableContacts(state.contacts.contacts));
-      
-      //this.store.dispatch(new contactsActions.LoadAll());
-      //this.store.dispatch(new contactsActions.Search(this.contactFilter$));
-      
     }
 
     openDialog(): void {
@@ -41,10 +37,9 @@ export class ContactInviteComponent {
             data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts$, isCheckable: true }
           });
     
-    dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-       // this.projectName = result;
-      });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
     }
 }
 

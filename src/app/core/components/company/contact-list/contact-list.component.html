@@ -1,10 +1,8 @@
 
 
 <mat-table  [dataSource]="dataSource" matSort>
-      
-     
         <ng-container matColumnDef="id"  >
-                <mat-header-cell *matHeaderCellDef> {{isCheckable ? 'Tick': 'Id'}}  </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{isCheckable ? 'Invite': 'Id'}}  </mat-header-cell>
                 <mat-cell *matCellDef="let contact"> 
                                 <mat-checkbox [hidden]="!isCheckable"  (change)="toggleInviteContact(contact.id, $event)" [checked]="false">
 
@@ -13,7 +11,7 @@
                 </mat-cell>
         </ng-container>
         <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Contract Name </mat-header-cell>
                 <mat-cell *matCellDef="let contact"> {{contact.name}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="email">

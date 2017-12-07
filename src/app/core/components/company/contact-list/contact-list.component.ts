@@ -24,6 +24,7 @@ export class ContactListComponent implements OnInit {
 
   @Input() contacts: Observable<Contact[]>;
   @Input() isCheckable: boolean;
+  @Output() onToggleInviteContact = new EventEmitter()
   // @Output() onEdit = new EventEmitter<Contact>();
   // @Output() onShow = new EventEmitter<Contact>();
   // @Output() onDelete = new EventEmitter<Contact>();
@@ -51,12 +52,14 @@ export class ContactListComponent implements OnInit {
       index = this.invitedContactIds.indexOf(contactId);
     }
     
-    if(index <0){
+    if(index < 0){
       this.invitedContactIds.push(contactId);
     }
     else{
       this.invitedContactIds.splice(index,1);
     }
+
+    this.onToggleInviteContact.emit(this.invitedContactIds.length>0);
   }
 
   

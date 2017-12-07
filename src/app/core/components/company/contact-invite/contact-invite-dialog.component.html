@@ -3,7 +3,9 @@
  
  <mat-tab-group>
     <mat-tab label="exist contracts">
-        <app-contact-list [contacts]="data.availableContacts" [isCheckable]="data.isCheckable" ></app-contact-list>
+        <app-contact-list [contacts]="data.availableContacts" [isCheckable]="data.isCheckable" (onToggleInviteContact)="getInvitedContactIds($event)" ></app-contact-list>
+        <button mat-raised-button (click)="onNoClick()" >No Thanks</button>
+        <button mat-raised-button color="warn" [disabled]="noneInvited()" [mat-dialog-close]="data.projectName" >Invite</button>
     </mat-tab>
     <mat-tab label="new contracts">
         <mat-card class="center">
@@ -27,11 +29,13 @@
                     </form>
             </mat-card-content>
         </mat-card>
+        <button mat-button (click)="onNoClick()" >No Thanks</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="data.projectName" >Send Invitation</button>
     </mat-tab>
  </mat-tab-group>
  
 </div>
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" >No Thanks</button>
   <button mat-button [mat-dialog-close]="data.projectName" >Invite</button>
-</div>
+</div> -->
