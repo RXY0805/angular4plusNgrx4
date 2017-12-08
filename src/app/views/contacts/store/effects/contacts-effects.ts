@@ -28,6 +28,7 @@ export class ContactsEffects {
           this.contactsService.getAllContacts() 
       )
       .map((contacts: Contact[]) => new contactActions.LoadAllSuccess(contacts));
+      debugger;
 
   @Effect()
   load$: Observable<Action> = this.actions$

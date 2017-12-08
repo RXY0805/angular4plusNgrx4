@@ -7,7 +7,8 @@ import { ContactInviteDialog } from './contact-invite-dialog.component';
 
 import { MatDialog } from "@angular/material"
 import { Store } from '@ngrx/store';
-import { selectMatchingContacts, getAvailableContacts } from '@app-contacts-store/reducers/contacts-reducer';
+
+//import { selectMatchingContacts, getAvailableContacts } from '@app-contacts-store/reducers/contacts-reducer';
 
 import * as fromContacts from '@app-contacts-store'
 
@@ -27,8 +28,7 @@ export class ContactInviteComponent {
     }
 
     ngOnInit() {
-  
-      this.availableContacts$ = this.store.select(state => getAvailableContacts(state.contacts.contacts));
+      this.availableContacts$ = this.store.select(state=> fromContacts.getAvailableContacts(state.contacts));
     }
 
     openDialog(): void {

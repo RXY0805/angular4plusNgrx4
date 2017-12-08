@@ -1,12 +1,15 @@
-import * as fromContacts from './reducers/contacts-reducer'
-import * as fromSearch from './reducers/search';
-import * as fromRoot from '@app-root-store';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import { getMatchingContactIds } from './reducers/contacts-reducer';
+import * as fromContacts from './reducers/contacts-reducer'
+import * as fromSearchEmail from './reducers/search-email-reducer';
+
+import * as fromRoot from '@app-root-store';
+
+//import { getMatchingContactIds } from './reducers/contacts-reducer';
 
 export interface ContactsState {
   contacts: fromContacts.State;
-  //search: fromSearch.State;
+  searchEmail: fromSearchEmail.State;
+
 }
 
 // This is a lazy loaded state, so we need to extend from the App Root State
@@ -16,68 +19,80 @@ export interface State extends fromRoot.State {
 
 export const reducers = {
   contacts: fromContacts.reducer,
-  //search: fromSearch.reducer
+  //searchEmail: fromSearchEmail.reducer,
 };
 
 export const getContactsRootState = createFeatureSelector<ContactsState>('contacts');
 
+
 export const getContactsState = createSelector(
-    getContactsRootState,
-    state => state.contacts
+  getContactsRootState,
+  state => state.contacts,
 );
 
-export const getSelectedContactId = createSelector(
-  getContactsState,
-  fromContacts.getCurrentContactId
-);
+
 
 export const {
   selectAll: getAllContacts,
   selectEntities: getContactEntities
 } = fromContacts.contactsAdapter.getSelectors(getContactsState);
 
-export const getCurrentContact = createSelector(
-  getContactEntities,
-  getSelectedContactId,
-  (entities, id) => id && entities[id]
+export const getSelectedContactId = createSelector(
+  getContactsState,
+  fromContacts.getCurrentContactId
 );
 
-/** Get search reducer selectors */
-// export const getSearchState = createSelector(
-//   getContactsRootState,
-//   (state: ContactsState) => state.search
-// )
+export const getMatchingContactIds = createSelector(
+  getContactsState,
+  fromContacts.getDisplayedContactListIds
+);
 
-// export const getSearchResultContacts = createSelector(
-//   getContactEntities,
-//   getMatchingContactIds,
-//   (allEntities, result) => result.map(x => allEntities[x])
-// )
 
-// export const getSearchContactIds = createSelector(
-//   getSearchState,
-//   fromSearch.getIds
-// )
-// export const getSearchQuery = createSelector(
-//   getSearchState,
-//   fromSearch.getQuery
-// );
-// export const getSearchLoading = createSelector(
-//   getSearchState,
-//   fromSearch.getLoading
-// );
-// export const getSearchError = createSelector(
-//   getSearchState,
-//   fromSearch.getError
-// );
+export const getAvailableContactIds = createSelector(
+  getContactsState,
+  fromContacts.getAvailableContactListIds
+);
 
-// export const getSearchResults = createSelector(
-//   getContactEntities,
-//   getSearchContactIds,
-//   (books, searchIds) => {
-//     return searchIds.map(id => books[id]);
-//   }
-// );
+export const selectMatchingContacts = createSelector(getContactsState, getMatchingContactIds,
+     (allContacts, matchingIds: string[],) => 
+        !matchingIds
+          ? Object.keys(allContacts)
+            .map(key => allContacts[key])
+            .filter(c => !c.isPending)
+          : matchingIds.map(x => allContacts[x])
+  );
+
+export const getAvailableContacts = createSelector(getContactsState, getAvailableContactIds,
+    (allContacts, matchingIds: string[]) => matchingIds.map(x => allContacts[x])
+);
+
+export const getCurrentContact = createSelector(getContactsState , getSelectedContactId,
+    (entities, selectedId) => {
+      return selectedId && entities[selectedId];
+    }
+)
+// export const getMatchingContactIds = (state: State) => state.displayedContactListIds;
+// export const getAvailableContactIds =(state: State) => state.availableContactListId;
+
+// export const getContactEntities = (state: State) => state.entities;
+// //export const getSelectedProjectId =(state:State) => state.selectedProjectId;
+
+// export const selectAllContacts = (state: any) => Object.keys(state.entities).map(key => state.entities[key]);
+
+// export const selectMatchingContacts = createSelector(getContactEntities, getMatchingContactIds,
+//   (allContacts, matchingIds: string[],) => 
+//     !matchingIds
+//       ? Object.keys(allContacts)
+//         .map(key => allContacts[key])
+//         .filter(c => !c.isPending)
+//       : matchingIds.map(x => allContacts[x])
+//   );
+
+//   export const getAvailableContacts = createSelector(getContactEntities, getAvailableContactIds,
+//     (allContacts, matchingIds: string[]) => matchingIds.map(x => allContacts[x])
+     
+     
+//     );
 
 
 

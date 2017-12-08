@@ -121,6 +121,11 @@ export class SearchEmail implements Action {
   readonly type = SEARCH_EMAIL;
   constructor(public payload: string){}
 }
+export class SearchEmailComplete implements Action {
+  readonly type = SEARCH_EMAIL_COMPLETE;
+  constructor(public payload: Contact[]){}
+}
+
 
 export type All =
     | SetCurrentContactId
@@ -140,3 +145,4 @@ export type All =
     | SearchComplete
     | SearchError
     | SearchEmail
+    | SearchEmailComplete

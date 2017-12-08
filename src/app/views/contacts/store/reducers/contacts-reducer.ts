@@ -1,3 +1,6 @@
+
+
+
 import { Contact, ContactFilter } from '@app-core/models';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
@@ -22,8 +25,7 @@ export const contactsAdapter = createEntityAdapter<Contact>({
 export interface State extends EntityState<Contact> {
   currentContactId?: string,
   displayedContactListIds?: string[],
-  availableContactListId?: string[],
-  duplicatedContactId?: string[],
+  availableContactListIds?: string[],
 }
 
 export const INIT_STATE: State = contactsAdapter.getInitialState({
@@ -62,11 +64,10 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
         .filter(contact => contact.isPending == searchFilters.isPending)
         .filter(contact => !searchFilters.searchText.trim().length
             || contact.name.toLowerCase().includes(searchFilters.searchText.toLowerCase()))
-        .filter(contact => !searchFilters.selectedProjectId 
-            || contact.projectId == searchFilters.selectedProjectId)
+        .filter(contact => contact.projectId == searchFilters.selectedProjectId)
         .map(contact => contact.id);
 
-        const availableContacts = Object.keys(state.entities)
+        const availableContactIds = Object.keys(state.entities)
         .map(key => state.entities[key])
         .filter(contact => !searchFilters.selectedProjectId 
             || contact.projectId != searchFilters.selectedProjectId)
@@ -75,7 +76,7 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
       return {
         ...state,
         displayedContactListIds: newContacts,
-        availableContactListId: availableContacts,
+        availableContactListIds: availableContactIds,
       }
     }
 
@@ -109,25 +110,6 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
 }
 
 export const getCurrentContactId = (state: State) => state.currentContactId;
-export const getMatchingContactIds = (state: State) => state.displayedContactListIds;
-export const getAvailableContactIds =(state: State) => state.availableContactListId;
-
-export const getContactEntities = (state: State) => state.entities;
-//export const getSelectedProjectId =(state:State) => state.selectedProjectId;
-
-export const selectAllContacts = (state: any) => Object.keys(state.entities).map(key => state.entities[key]);
-
-export const selectMatchingContacts = createSelector(getContactEntities, getMatchingContactIds,
-  (allContacts, matchingIds: string[],) => 
-    !matchingIds
-      ? Object.keys(allContacts)
-        .map(key => allContacts[key])
-        .filter(c => !c.isPending)
-      : matchingIds.map(x => allContacts[x])
-  );
-
-  export const getAvailableContacts = createSelector(getContactEntities, getAvailableContactIds,
-    (allContacts, matchingIds: string[]) => matchingIds.map(x => allContacts[x])
-     
-     
-    );
+export const getDisplayedContactListIds =(state: State) => state.displayedContactListIds;
+export const getAvailableContactListIds =(state: State) => state.availableContactListIds;
+//export const getCurrentContactId = (state: State) => state.

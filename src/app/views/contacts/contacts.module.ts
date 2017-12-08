@@ -13,11 +13,11 @@ import { ContactNewComponent } from './contact-new/contact-new.component';
 import { ContactsIndexComponent } from './contacts-index/contacts-index.component';
 
 
-import * as fromContacts from './store'
+import * as fromContacts from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { ContactsEffects } from './store/effects/contacts-effects';
 
-import { initialState } from './store/reducers/search'
+// import { initialState } from './store/reducers/search'
 
 @NgModule({
   imports: [

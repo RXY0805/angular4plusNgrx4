@@ -10,8 +10,6 @@ import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
 
-import { selectMatchingContacts, getAvailableContacts } from '@app-contacts-store/reducers/contacts-reducer';
-
 import {Observable} from 'rxjs/Observable';
 
 
@@ -24,7 +22,6 @@ import {Observable} from 'rxjs/Observable';
 })
 
 export class ContactsIndexComponent implements OnInit {
-   displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
    public contacts$: Observable<Contact[]>;
    //public availableContacts$: Observable<Contact[]>;
    public isCheckable$: boolean;
@@ -38,10 +35,8 @@ export class ContactsIndexComponent implements OnInit {
    public currentProject$: Project;
    public projects$: Project[];
  
-
-  
   constructor(
-      public store: Store<fromContacts.State>, 
+      public store: Store<fromRoot.State>, 
       private router: Router, 
       private actR: ActivatedRoute) {
      
@@ -51,7 +46,8 @@ export class ContactsIndexComponent implements OnInit {
     this.projects$ =[{id:1, name:'aaa'},{id:2, name:'bbb'},{id:3, name:'ccc'}];
     this.contactFilter$.selectedProjectId = this.projects$[0].id;
     this.isCheckable$ = false;
-    this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+    this.contacts$ = this.store.select(fromContacts.getAllContacts);
+    //this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts));
     this.store.dispatch(new contactsActions.LoadAll());
     //this.store.dispatch(new contactsActions.Search(this.contactFilter$));
     
