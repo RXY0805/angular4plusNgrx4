@@ -23,6 +23,10 @@ export const SEARCH = '[Contacts] SEARCH';
 export const SEARCH_COMPLETE = '[Contacts] SEARCH COMPLETE';
 export const SEARCH_ERROR = '[Contacts] SEARCH ERROR';
 
+export const SEARCH_EMAIL = '[Contacts] SEARCH EMAIL';
+export const SEARCH_EMAIL_COMPLETE = '[Contacts] SEARCH EMAIL COMPLETE';
+export const SEARCH_EMAIL_ERROR = '[Contacts] SEARCH EMAIL ERROR';
+
 export const SET_CURRENT_CONTACT_ID = '[Contacts] SET CURRENT CONTACT ID';
 
 import { ContactFilter } from '@app-core/models';
@@ -94,6 +98,7 @@ export class DeleteSuccess implements Action {
   constructor(public payload: string) {}
 }
 
+
 export class Search implements Action {
   readonly type = SEARCH;
 
@@ -110,6 +115,11 @@ export class SearchError implements Action {
   readonly type = SEARCH_ERROR;
 
   constructor(public payload: string) {}
+}
+
+export class SearchEmail implements Action {
+  readonly type = SEARCH_EMAIL;
+  constructor(public payload: string){}
 }
 
 export type All =
@@ -129,3 +139,4 @@ export type All =
     | Search
     | SearchComplete
     | SearchError
+    | SearchEmail

@@ -14,8 +14,19 @@
     width: 100%;
 }
 
-.mat-button-right .button-group {
+.button-group {
+    
+    height: 50px;
+    margin-top: 20px;
+}
+.mat-button-right {
     position: absolute;
     right: 0px;
+    margin: 0;
+  }
+  
+   .mat-button-left {
+    position: absolute;
+    left: 0px;
     margin: 0;
   }

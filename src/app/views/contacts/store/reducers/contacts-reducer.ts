@@ -23,6 +23,7 @@ export interface State extends EntityState<Contact> {
   currentContactId?: string,
   displayedContactListIds?: string[],
   availableContactListId?: string[],
+  duplicatedContactId?: string[],
 }
 
 export const INIT_STATE: State = contactsAdapter.getInitialState({
@@ -36,6 +37,21 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
     //case contactsActions.SEARCH_COMPLETE:
     case contactsActions.SET_CURRENT_CONTACT_ID: {
       return { ...state, currentContactId: payload }
+    }
+
+    case contactsActions.SEARCH_EMAIL: {
+      const email : string = payload;
+
+      const duplicatedContactId = Object.keys(state.entities)
+      .map(key => state.entities[key])
+      .filter(contact => contact.email.toLowerCase().trim()===email.toLowerCase().trim())
+      .map(contact => contact.id);
+
+    
+      return {
+        ...state,
+        duplicatedContactId: duplicatedContactId
+      }
     }
 
     case contactsActions.SEARCH: {
@@ -95,6 +111,7 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
 export const getCurrentContactId = (state: State) => state.currentContactId;
 export const getMatchingContactIds = (state: State) => state.displayedContactListIds;
 export const getAvailableContactIds =(state: State) => state.availableContactListId;
+
 export const getContactEntities = (state: State) => state.entities;
 //export const getSelectedProjectId =(state:State) => state.selectedProjectId;
 

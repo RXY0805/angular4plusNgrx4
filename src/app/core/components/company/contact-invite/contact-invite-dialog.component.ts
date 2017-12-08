@@ -1,7 +1,6 @@
 
 import { Component, Inject } from '@angular/core';
 import { FormControl, Validators} from '@angular/forms';
-
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
 @Component({
     selector: 'contact-invite-dialog',
@@ -10,7 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
   })
   export class ContactInviteDialog {
     public noneContractInvited: boolean;
-
+    public isExistedEmail: boolean;
     emailFormControl = new FormControl('', [
         Validators.required,
         Validators.email,
@@ -29,4 +28,15 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
             
             this.noneContractInvited = !contactInvited;
         }
+        onInvitation(): void {
+            alert('invited');
+            //this.dialogRef.close();
+        }
+        triggerEmailSearch(value){
+            if(!this.emailFormControl.errors){
+                //check existing email
+            }
+            
+        }
+
   }

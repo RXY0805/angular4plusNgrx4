@@ -26,8 +26,9 @@ import {Observable} from 'rxjs/Observable';
 export class ContactsIndexComponent implements OnInit {
    displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
    public contacts$: Observable<Contact[]>;
-   public availableContacts$: Observable<Contact[]>;
+   //public availableContacts$: Observable<Contact[]>;
    public isCheckable$: boolean;
+
    contactFilter$: ContactFilter = {
      searchText:'',
      isPending: false,

@@ -4,8 +4,10 @@
  <mat-tab-group>
     <mat-tab label="exist contracts">
         <app-contact-list [contacts]="data.availableContacts" [isCheckable]="data.isCheckable" (onToggleInviteContact)="getInvitedContactIds($event)" ></app-contact-list>
-        <button mat-raised-button (click)="onNoClick()" >No Thanks</button>
-        <button mat-raised-button color="warn" [disabled]="noneContractInvited" [mat-dialog-close]="data.projectName" >Invite</button>
+        <div class="button-group">
+                <button class="mat-button-left" mat-raised-button (click)="onNoClick()" >No Thanks</button>
+                <button class="mat-button-right" mat-raised-button color="warn" (click)="onInvitation()" [disabled]="noneContractInvited" [mat-dialog-close]="data.projectName" >Invite</button>
+        </div>
     </mat-tab>
     <mat-tab label="new contracts">
         <mat-card class="center">
@@ -18,20 +20,23 @@
                                      <textarea matInput placeholder="Company Name"></textarea>
                              </mat-form-field>
                              <mat-form-field class="full-width">
-                                     <input matInput placeholder="Email" [formControl]="emailFormControl">
+                                     <input matInput placeholder="Email" (keyup)="triggerEmailSearch($event.target.value)" [formControl]="emailFormControl">
                                      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                        Please enter a valid email address
                                      </mat-error>
                                      <mat-error *ngIf="emailFormControl.hasError('required')">
                                        Email is <strong>required</strong>
                                      </mat-error>
+                                     <mat-error *ngIf="isExistedEmail">
+                                        Email is existed.
+                                     </mat-error>
                              </mat-form-field>
                     </form>
             </mat-card-content>
         </mat-card>
         <div class="button-group">
-                <button class="mat-button-right" mat-button (click)="onNoClick()" >No Thanks</button>
-                <button class="mat-button-right" mat-raised-button color="warn" [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')"  
+                <button class="mat-button-left" mat-button (click)="onNoClick()" >No Thanks</button>
+                <button class="mat-button-right" mat-raised-button color="warn" (click)="onInvitation()" [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')"  
                 [mat-dialog-close]="data.projectName" >Send Invitation</button>
         </div>
     </mat-tab>
