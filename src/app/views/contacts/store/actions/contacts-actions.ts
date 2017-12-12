@@ -23,9 +23,9 @@ export const SEARCH = '[Contacts] SEARCH';
 export const SEARCH_COMPLETE = '[Contacts] SEARCH COMPLETE';
 export const SEARCH_ERROR = '[Contacts] SEARCH ERROR';
 
-export const SEARCH_EMAIL = '[Contacts] SEARCH EMAIL';
-export const SEARCH_EMAIL_COMPLETE = '[Contacts] SEARCH EMAIL COMPLETE';
-export const SEARCH_EMAIL_ERROR = '[Contacts] SEARCH EMAIL ERROR';
+export const CHECK_EMAIL_EXIST = '[Contacts] CHECK EMAIL EXIST';
+export const CHECK_EMAIL_COMPLETE = '[Contacts] CHECK EMAIL COMPLETE';
+export const CHECK_EMAIL_ERROR = '[Contacts] CHECK EMAIL ERROR';
 
 export const SET_CURRENT_CONTACT_ID = '[Contacts] SET CURRENT CONTACT ID';
 
@@ -117,8 +117,8 @@ export class SearchError implements Action {
   constructor(public payload: string) {}
 }
 
-export class SearchEmail implements Action {
-  readonly type = SEARCH_EMAIL;
+export class CheckEmailExist implements Action {
+  readonly type = CHECK_EMAIL_EXIST;
   constructor(public payload: string){}
 }
 
@@ -139,4 +139,4 @@ export type All =
     | Search
     | SearchComplete
     | SearchError
-    | SearchEmail
+    | CheckEmailExist

@@ -39,14 +39,13 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
       return { ...state, currentContactId: payload }
     }
 
-    case contactsActions.SEARCH_EMAIL: {
+    case contactsActions.CHECK_EMAIL_EXIST: {
       const email : string = payload;
-
+ 
       const duplicatedContactId = Object.keys(state.entities)
       .map(key => state.entities[key])
       .filter(contact => contact.email.toLowerCase().trim()===email.toLowerCase().trim())
       .map(contact => contact.id);
-
     
       return {
         ...state,
@@ -111,6 +110,7 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
 export const getCurrentContactId = (state: State) => state.currentContactId;
 export const getMatchingContactIds = (state: State) => state.displayedContactListIds;
 export const getAvailableContactIds =(state: State) => state.availableContactListId;
+export const getDuplicatedContactId = (state: State) => state.duplicatedContactId;
 
 export const getContactEntities = (state: State) => state.entities;
 //export const getSelectedProjectId =(state:State) => state.selectedProjectId;
@@ -132,3 +132,8 @@ export const selectMatchingContacts = createSelector(getContactEntities, getMatc
       .map(key => allContacts[key])
       : matchingIds.map(x => allContacts[x])
     );
+
+    export const getDuplicatedContact = createSelector(getContactEntities, getDuplicatedContactId,
+      (allContacts, matchingIds: string[]) =>  
+          matchingIds.map(x => allContacts[x])
+      );
