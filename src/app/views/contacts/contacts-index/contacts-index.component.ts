@@ -38,27 +38,23 @@ export class ContactsIndexComponent implements OnInit {
    public currentProject$: Project;
    public projects$: Project[];
  
-
-  
   constructor(
       public store: Store<fromContacts.State>, 
       private router: Router, 
       private actR: ActivatedRoute) {
-     
+        this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+        this.store.dispatch(new contactsActions.LoadAll());
     }
 
   ngOnInit() {
     this.projects$ =[{id:1, name:'aaa'},{id:2, name:'bbb'},{id:3, name:'ccc'}];
     this.contactFilter$.selectedProjectId = this.projects$[0].id;
+    this.contacts$ = this.contacts$.map(contacts => contacts.filter ( c => c.projectId == this.contactFilter$.selectedProjectId));
     this.isCheckable$ = false;
-    this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
-    this.store.dispatch(new contactsActions.LoadAll());
-    //this.store.dispatch(new contactsActions.Search(this.contactFilter$));
-    
   }
   
   searchContacts(event: ContactFilter) {
-    this.currentProject$ = this.projects$.filter(r=>r.id == this.contactFilter$.selectedProjectId)[0];
+    this.currentProject$ = this.projects$.filter( r=>r.id == this.contactFilter$.selectedProjectId)[0];
     this.store.dispatch(new contactsActions.Search(event));
   }
 
