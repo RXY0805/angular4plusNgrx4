@@ -45,9 +45,11 @@ import * as fromContacts from '@app-contacts-store'
         }
 
         onInvitation(): void {
-            
+            //dispatch create invitation action then post data to web api
+            alert("please check console log");
+            console.log(this.invitation);
             //alert(this.invitation.existContractIds.length);
-            alert( this.invitation.newContractEmail + this.invitation.projectId);
+           // alert( this.invitation.newContractEmail + this.invitation.projectId);
             //this.dialogRef.close();
         }
 

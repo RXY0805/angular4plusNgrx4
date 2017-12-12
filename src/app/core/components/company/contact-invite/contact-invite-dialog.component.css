@@ -30,3 +30,8 @@
     left: 0px;
     margin: 0;
   }
+
+  .error-message {
+    color: #f44336;
+    font-size: 14px;
+  }
