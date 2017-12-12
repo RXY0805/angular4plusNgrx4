@@ -2,6 +2,7 @@
 
 <app-contact-search [projects]="projects$" [contactFilter]="contactFilter$" (onSearch)="searchContacts($event)" ></app-contact-search>
 
-<app-contact-invite [currentProject]="currentProject$" [availableContacts]="availableContacts$"></app-contact-invite>
+<app-contact-invite [currentProject]="currentProject$" [availableContacts]="availableContacts$" ></app-contact-invite>
+<!-- //[duplicatedContactIds]="duplicatedContactIds$" -->
 
 <app-contact-list [contacts]="contacts$" [isCheckable]="isCheckable$"></app-contact-list>

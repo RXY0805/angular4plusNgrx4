@@ -22,6 +22,7 @@ export class ContactInviteComponent {
     
     @Input() currentProject: Project
     @Input() availableContacts:  Observable<Contact[]>
+   // @Input() duplicatedContactIds: string[]
     
     constructor(public dialog: MatDialog, public store: Store<fromContacts.State>){
     }
@@ -33,7 +34,10 @@ export class ContactInviteComponent {
     openDialog(): void {
         let dialogRef = this.dialog.open(ContactInviteDialog, {
             width: '650px',
-            data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts, isCheckable: true }
+            data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts, 
+                    isCheckable: true, 
+                    //duplicatedContactIds: this.duplicatedContactIds 
+                  }
           });
     
         dialogRef.afterClosed().subscribe(result => {

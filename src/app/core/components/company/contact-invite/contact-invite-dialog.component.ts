@@ -4,6 +4,12 @@ import { FormControl, Validators} from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
 import { Project, ProjectInvitation } from '@app-core/models';
 
+import * as contactsActions from '@app-contacts-store/actions/contacts-actions';
+import { selectMatchingContacts, getAvailableContacts, getDuplicatedContactIds } from '@app-contacts-store/reducers/contacts-reducer';
+
+import { Store } from '@ngrx/store';
+import * as fromContacts from '@app-contacts-store'
+
 @Component({
     selector: 'contact-invite-dialog',
     styleUrls: ['contact-invite-dialog.component.css'],
@@ -12,6 +18,7 @@ import { Project, ProjectInvitation } from '@app-core/models';
   export class ContactInviteDialog {
     public noneContractInvited: boolean;
     public isExistedEmail: boolean;
+    public duplicatedContactIds: string[] = [];
     invitation : ProjectInvitation = {
         projectId: 0,
     };
@@ -22,9 +29,10 @@ import { Project, ProjectInvitation } from '@app-core/models';
       ]);
 
     
-    constructor(public dialogRef: MatDialogRef<ContactInviteDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { 
+    constructor(public dialogRef: MatDialogRef<ContactInviteDialog>, @Inject(MAT_DIALOG_DATA) public data: any, public store: Store<fromContacts.State>) { 
         this.noneContractInvited = true;
         this.invitation.projectId = data.projectId;
+        this.isExistedEmail = false;
     }
   
         onNoClick(): void {
@@ -44,10 +52,13 @@ import { Project, ProjectInvitation } from '@app-core/models';
         }
 
         triggerEmailSearch(value){
+
             if(!this.emailFormControl.errors){
                 this.invitation.newContractEmail = value;
+                this.store.select(state => getDuplicatedContactIds(state.contacts.contacts)).subscribe(res => this.duplicatedContactIds = res as string[]);
+                this.store.dispatch(new contactsActions.CheckEmailExist(value));
+                this.isExistedEmail = this.duplicatedContactIds.length>0;
             }
-            
         }
 
 

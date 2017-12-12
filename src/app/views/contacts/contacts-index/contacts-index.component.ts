@@ -10,7 +10,7 @@ import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
 import * as fromRoot from '@app-root-store';
 
-import { selectMatchingContacts, getAvailableContacts } from '@app-contacts-store/reducers/contacts-reducer';
+import { selectMatchingContacts, getAvailableContacts, getDuplicatedContactIds } from '@app-contacts-store/reducers/contacts-reducer';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -27,6 +27,7 @@ export class ContactsIndexComponent implements OnInit {
    displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
    public contacts$: Observable<Contact[]>;
    public availableContacts$: Observable<Contact[]>;
+   public duplicatedContactIds$: string[];
    public isCheckable$: boolean;
 
    contactFilter$: ContactFilter = {
@@ -44,6 +45,8 @@ export class ContactsIndexComponent implements OnInit {
       private actR: ActivatedRoute) {
         this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
         this.availableContacts$= this.store.select(state => getAvailableContacts(state.contacts.contacts));
+        //this.store.select(state => getDuplicatedContactIds(state.contacts.contacts)).subscribe(res => this.duplicatedContactIds$ = res as string[]);
+        //debugger;
         this.store.dispatch(new contactsActions.LoadAll());
     }
 
