@@ -127,7 +127,8 @@ export const selectMatchingContacts = createSelector(getContactEntities, getMatc
   );
 
   export const getAvailableContacts = createSelector(getContactEntities, getAvailableContactIds,
-    (allContacts, matchingIds: string[]) => matchingIds.map(x => allContacts[x])
-     
-     
+    (allContacts, matchingIds: string[]) => !matchingIds
+    ? Object.keys(allContacts)
+      .map(key => allContacts[key])
+      : matchingIds.map(x => allContacts[x])
     );

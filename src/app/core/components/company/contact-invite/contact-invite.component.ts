@@ -11,7 +11,7 @@ import { selectMatchingContacts, getAvailableContacts } from '@app-contacts-stor
 
 import * as fromContacts from '@app-contacts-store'
 
-import { ContactFilter,Contact, Project } from '@app-core/models';
+import { Contact, Project, ProjectInvitation } from '@app-core/models';
 
 @Component({
   selector: 'app-contact-invite',
@@ -21,20 +21,19 @@ import { ContactFilter,Contact, Project } from '@app-core/models';
 export class ContactInviteComponent {
     
     @Input() currentProject: Project
-    availableContacts$: Observable<Contact[]>
+    @Input() availableContacts:  Observable<Contact[]>
+    
     constructor(public dialog: MatDialog, public store: Store<fromContacts.State>){
-        
     }
 
     ngOnInit() {
-  
-      this.availableContacts$ = this.store.select(state => getAvailableContacts(state.contacts.contacts));
+      
     }
 
     openDialog(): void {
         let dialogRef = this.dialog.open(ContactInviteDialog, {
             width: '650px',
-            data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts$, isCheckable: true }
+            data: { projectId: this.currentProject.id, projectName: this.currentProject.name, availableContacts: this.availableContacts, isCheckable: true }
           });
     
         dialogRef.afterClosed().subscribe(result => {

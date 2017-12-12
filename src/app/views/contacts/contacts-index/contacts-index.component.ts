@@ -26,7 +26,7 @@ import {Observable} from 'rxjs/Observable';
 export class ContactsIndexComponent implements OnInit {
    displayedColumns = ['id', 'name', 'email', 'phone','isPending'];
    public contacts$: Observable<Contact[]>;
-   //public availableContacts$: Observable<Contact[]>;
+   public availableContacts$: Observable<Contact[]>;
    public isCheckable$: boolean;
 
    contactFilter$: ContactFilter = {
@@ -43,13 +43,16 @@ export class ContactsIndexComponent implements OnInit {
       private router: Router, 
       private actR: ActivatedRoute) {
         this.contacts$ = this.store.select(state => selectMatchingContacts(state.contacts.contacts));
+        this.availableContacts$= this.store.select(state => getAvailableContacts(state.contacts.contacts));
         this.store.dispatch(new contactsActions.LoadAll());
     }
 
   ngOnInit() {
     this.projects$ =[{id:1, name:'aaa'},{id:2, name:'bbb'},{id:3, name:'ccc'}];
     this.contactFilter$.selectedProjectId = this.projects$[0].id;
-    this.contacts$ = this.contacts$.map(contacts => contacts.filter ( c => c.projectId == this.contactFilter$.selectedProjectId));
+    this.contacts$ = this.contacts$.map(contacts => contacts.filter( c => c.projectId == this.contactFilter$.selectedProjectId));
+    this.availableContacts$ = this.availableContacts$.map(contacts => contacts.filter( c => c.projectId != this.contactFilter$.selectedProjectId));
+    this.currentProject$ = this.projects$[0];
     this.isCheckable$ = false;
   }
   

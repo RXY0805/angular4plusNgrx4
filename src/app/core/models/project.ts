@@ -6,8 +6,8 @@ export interface Project {
   export interface ProjectInvitation {
     id?: number;
     projectId: number;
-    existContractIds: string[];
-    newContractEmail: string;
+    existContractIds?: string[];
+    newContractEmail?: string;
   }
   
  

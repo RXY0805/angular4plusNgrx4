@@ -59,7 +59,7 @@ export class ContactListComponent implements OnInit {
       this.invitedContactIds.splice(index,1);
     }
 
-    this.onToggleInviteContact.emit(this.invitedContactIds.length>0);
+    this.onToggleInviteContact.emit(this.invitedContactIds);
   }
 
   
