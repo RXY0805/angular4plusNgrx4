@@ -20,7 +20,8 @@
                                      <textarea matInput placeholder="Company Name"></textarea>
                              </mat-form-field>
                              <mat-form-field class="full-width">
-                                     <input matInput placeholder="Email" (keyup)="triggerEmailSearch($event.target.value)" [formControl]="emailFormControl">
+                                     <input matInput placeholder="Email"  (change)="triggerEmailSearch($event.target.value)"
+                                           [formControl]="emailFormControl" (keyup)="triggerEmailSearch($event.target.value)" >
                                      <mat-hint class="error-message" *ngIf="isExistedEmail">The email is existed in 3DSS</mat-hint>
                                      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                        Please enter a valid email address

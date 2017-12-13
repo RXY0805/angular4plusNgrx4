@@ -1,32 +1,22 @@
-<!-- <md-card>
-    <md-card-title>Find a Book</md-card-title> 
-    <md-card-content>
-      <md-input-container>
-        <input mdInput placeholder="Search for contractors" [value]="query" (keyup)="search.emit($event.target.value)">
-      </md-input-container>
-      <md-spinner [class.show]="searching"></md-spinner>
-    </md-card-content>
-    <md-card-footer><span *ngIf="error">{{error}}</span></md-card-footer>
-  </md-card> -->
 
-  <div>
-    <h3>Please select the project</h3>
-   
-    <mat-form-field>
-        <mat-select placeholder="selected project" [(ngModel)]="contactFilter.selectedProjectId" (selectionChange)="triggerFilter()">
+  <h3>Please select the project</h3>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="selected project" [(ngModel)]="contactFilter.selectedProjectId" (selectionChange)="triggerFilter()">
             <mat-option *ngFor="let p of projects" [value]="p.id">{{p.name}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-  </div>
-  <mat-card>
-      <mat-card-content>
-    
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
         <section class="search-section">
-          <mat-checkbox class="search-margin" (change)="triggerFilter()"
-                       [(ngModel)]="contactFilter.isPending">Pending Contractors
+          Pending Contractors
+          <mat-checkbox class="search-margin" (change)="triggerFilter()" [(ngModel)]="contactFilter.isPending">
           </mat-checkbox>
         </section>
-      </mat-card-content>
-  </mat-card>
+      </td>
+    </tr>
+  </table>
 
