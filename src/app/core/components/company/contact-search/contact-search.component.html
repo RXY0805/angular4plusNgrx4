@@ -10,16 +10,23 @@
   </md-card> -->
 
   <div>
-    <h3> select the project</h3>
-    <!--  -->
-    <select [(ngModel)]="contactFilter.selectedProjectId" (change)="triggerFilter(contactFilter.selectedProjectId = $event.target.value)">
-      <option *ngFor="let p of projects" [value]="p.id">{{p.name}}</option>
-    </select>
+    <h3>Please select the project</h3>
    
+    <mat-form-field>
+        <mat-select placeholder="selected project" [(ngModel)]="contactFilter.selectedProjectId" (selectionChange)="triggerFilter()">
+            <mat-option *ngFor="let p of projects" [value]="p.id">{{p.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
   </div>
-  <div>
-      <!-- <input  placeholder="Search for contractors" [value]="contactFilter.searchText"
-              (keyup)="triggerFilter(contactFilter.searchText = $event.target.value)"> -->
-              Pending <input type="checkbox" [checked]="contactFilter.isPending" 
-              (change)="contactFilter.isPending =!contactFilter.isPending; triggerFilter($event.target.value)" > 
-  </div>
+  <mat-card>
+      <mat-card-content>
+    
+        <section class="search-section">
+          <mat-checkbox class="search-margin" (change)="triggerFilter()"
+                       [(ngModel)]="contactFilter.isPending">Pending Contractors
+          </mat-checkbox>
+        </section>
+      </mat-card-content>
+  </mat-card>
+
