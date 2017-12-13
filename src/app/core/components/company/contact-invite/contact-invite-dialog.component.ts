@@ -41,7 +41,7 @@ import * as fromContacts from '@app-contacts-store'
 
         getInvitedContactIds(invitedContactIds){
             this.invitation.existContractIds = invitedContactIds;
-            this.noneContractInvited = !invitedContactIds;
+            this.noneContractInvited = !this.invitation.existContractIds.length;
         }
 
         onInvitation(): void {
