@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Contact } from '@app-core/models';
 
 import { ContactsDatabase, ContactsDataSource } from './contacts.datasource';
@@ -30,9 +30,12 @@ export class ContactListComponent implements OnInit {
   // @Output() onDelete = new EventEmitter<Contact>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('filter') filter: ElementRef;
+
 
  private paginatorSubscription: Subscription = Subscription.EMPTY
  private sortSubscription: Subscription = Subscription.EMPTY
+ private query: string;
   contactsTrackByFn = (index: number, contact: Contact) => contact.id;
 
   constructor() {}
@@ -42,6 +45,13 @@ export class ContactListComponent implements OnInit {
     this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending'];
     this.contactsDatabase = new ContactsDatabase(this.contacts);
     this.dataSource = new ContactsDataSource(this.contactsDatabase, this.paginator, this.sort);
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) { return; }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
   }
 
   toggleInviteContact(contactId) {

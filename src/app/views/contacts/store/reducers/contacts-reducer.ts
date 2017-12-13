@@ -58,8 +58,8 @@ export function reducer(state: State = INIT_STATE, { type, payload }: contactsAc
       const newContacts = Object.keys(state.entities)
         .map(key => state.entities[key])
         .filter(contact => contact.isPending == searchFilters.isPending)
-        .filter(contact => !searchFilters.searchText.trim().length
-            || contact.name.toLowerCase().includes(searchFilters.searchText.toLowerCase()))
+        // .filter(contact => !searchFilters.searchText.trim().length
+        //     || contact.name.toLowerCase().includes(searchFilters.searchText.toLowerCase()))
         .filter(contact => !searchFilters.selectedProjectId 
             || contact.projectId == searchFilters.selectedProjectId)
         .map(contact => contact.id);

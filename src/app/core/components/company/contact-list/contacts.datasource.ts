@@ -40,10 +40,17 @@ export class ContactsDatabase {
     
     export class ContactsDataSource extends DataSource<any> {
       
+      _filterChange = new BehaviorSubject('');
+      get filter(): string { return this._filterChange.value; }
+      set filter(filter: string) { this._filterChange.next(filter); }
+    
+      filteredData: Contact[] = [];
+
       renderedData: Contact[] = [];
     
       public constructor(private _contactsDatabase: ContactsDatabase, private _paginator: MatPaginator, private _sort: MatSort) {
-        super()
+        super();
+        this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
       }
     
       connect(): Observable<Contact[]> {
@@ -51,11 +58,19 @@ export class ContactsDatabase {
           this._contactsDatabase.dataChange,
           this._paginator.page,
           this._sort.sortChange,
+          this._filterChange,
         ];
     
         return Observable.merge(...displayDataChanges).map(() => {
-          const data = this._contactsDatabase.data.slice();
-          const sortedData = this.sortData(data.slice());
+          
+
+          this.filteredData = this._contactsDatabase.data.slice().filter((item: Contact) => {
+            let searchStr = (item.name + item.email).toLowerCase();
+            return searchStr.indexOf(this.filter.toLowerCase()) != -1;
+          });
+
+
+          const sortedData = this.sortData(this.filteredData.slice());
           const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
           this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
           return this.renderedData;
