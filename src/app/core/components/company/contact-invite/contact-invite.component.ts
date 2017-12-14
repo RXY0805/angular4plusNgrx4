@@ -22,7 +22,6 @@ export class ContactInviteComponent {
     
     @Input() currentProject: Project
     @Input() availableContacts:  Observable<Contact[]>
-   // @Input() duplicatedContactIds: string[]
     
     constructor(public dialog: MatDialog, public store: Store<fromContacts.State>){
     }

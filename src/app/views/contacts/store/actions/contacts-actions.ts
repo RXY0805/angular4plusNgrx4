@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Contact } from '@app-core/models';
+import { Contact, ProjectInvitation } from '@app-core/models';
 
 
 export const LOAD_ALL = '[Contacts] LOAD ALL';
@@ -27,6 +27,8 @@ export const CHECK_EMAIL_EXIST = '[Contacts] CHECK EMAIL EXIST';
 export const CHECK_EMAIL_COMPLETE = '[Contacts] CHECK EMAIL COMPLETE';
 export const CHECK_EMAIL_ERROR = '[Contacts] CHECK EMAIL ERROR';
 
+export const INVITE_TO_PROJECT ='[Contacts] INVITE TO PROJECT';
+
 export const SET_CURRENT_CONTACT_ID = '[Contacts] SET CURRENT CONTACT ID';
 
 import { ContactFilter } from '@app-core/models';
@@ -52,6 +54,10 @@ export class Create implements Action {
   constructor(public payload: Contact) {}
 }
 
+export class InviteToProject implements Action {
+  readonly type = INVITE_TO_PROJECT;
+  constructor(public payload: ProjectInvitation) {}
+}
 
 export class Update implements Action {
   readonly type = UPDATE;
@@ -140,3 +146,4 @@ export type All =
     | SearchComplete
     | SearchError
     | CheckEmailExist
+    | InviteToProject

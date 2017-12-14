@@ -5,6 +5,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
 import { Project, ProjectInvitation } from '@app-core/models';
 
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions';
+import * as projectInvitationActions from '@app-contacts-store/actions/project-invitation-actions';
+
 import { selectMatchingContacts, getAvailableContacts, getDuplicatedContactIds } from '@app-contacts-store/reducers/contacts-reducer';
 
 import { Store } from '@ngrx/store';
@@ -46,11 +48,10 @@ import * as fromContacts from '@app-contacts-store'
 
         onInvitation(): void {
             //dispatch create invitation action then post data to web api
-            alert("please check console log");
+            //alert("please check console log");
             console.log(this.invitation);
-            //alert(this.invitation.existContractIds.length);
-           // alert( this.invitation.newContractEmail + this.invitation.projectId);
-            //this.dialogRef.close();
+            debugger;
+            this.store.dispatch(new projectInvitationActions.Create(this.invitation));
         }
 
         triggerEmailSearch(value){

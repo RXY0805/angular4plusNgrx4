@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
-import { Contact, ProjectInvitation } from '@app-core/models';
+import {  ProjectInvitation } from '@app-core/models';
 
 export const CREATE = '[Project Invitation] CREATE';
 export const CREATE_SUCCESS = '[Project Invitation] CREATE SUCCESS';
 export const CREATE_ERROR = '[Project Invitation] CREATE ERROR';
-export const SET_CURRENT_ID = '[Project Invitation] SET CURRENT ID'
+export const SET_CURRENT_INVITATION_ID = '[Project Invitation] SET CURRENT ID'
 
-export class SetCurrentId implements Action {
-    readonly type = SET_CURRENT_ID;
+export class SetCurrentInvitationId implements Action {
+    readonly type = SET_CURRENT_INVITATION_ID;
     constructor(public payload: number) {}
   }
 
@@ -31,5 +31,5 @@ export type All =
     | CreateSuccess
     | CreateError
     | Create
-    | SetCurrentId
+    | SetCurrentInvitationId
 

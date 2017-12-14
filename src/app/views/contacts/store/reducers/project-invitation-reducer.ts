@@ -25,7 +25,7 @@ export interface State extends EntityState<ProjectInvitation> {
 }
 
 export const INIT_STATE: State = projectInvitationsAdapter.getInitialState({
-  currentProjectInvitationId: undefined
+  currentProjectInvitationId: undefined,
 });
 
 export function reducer(state: State = INIT_STATE, { type, payload }: projectInvitationActions.All) {
@@ -33,7 +33,7 @@ export function reducer(state: State = INIT_STATE, { type, payload }: projectInv
   switch (type) {
 
     //case contactsActions.SEARCH_COMPLETE:
-    case projectInvitationActions.SET_CURRENT_ID: {
+    case projectInvitationActions.SET_CURRENT_INVITATION_ID: {
       return { ...state, currentProjectInvitationId: payload }
     }
 

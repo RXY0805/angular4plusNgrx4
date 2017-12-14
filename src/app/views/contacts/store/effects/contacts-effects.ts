@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import * as contactActions from '../actions/contacts-actions';
 
 import { Actions, Effect} from '@ngrx/effects';
-import { Contact } from '@app-core/models';
+import { Contact, ProjectInvitation } from '@app-core/models';
 import { ContactsService } from '@app-core/services/contacts.service';
 
 import 'rxjs/add/operator/catch';
@@ -42,7 +42,7 @@ export class ContactsEffects {
                 ]
               })
       );
-
+     
       @Effect()
       create$: Observable<Action> = this.actions$
           .ofType(contactActions.CREATE)

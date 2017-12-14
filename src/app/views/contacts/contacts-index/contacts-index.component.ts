@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
+//import * as projectInvitationActions from '@app-contacts-store/actions/project-invitation-actions';
 import * as fromRoot from '@app-root-store';
 
 import { selectMatchingContacts, getAvailableContacts, getDuplicatedContactIds } from '@app-contacts-store/reducers/contacts-reducer';
