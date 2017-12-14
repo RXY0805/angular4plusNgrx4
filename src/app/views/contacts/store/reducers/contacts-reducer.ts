@@ -132,7 +132,4 @@ export const selectMatchingContacts = createSelector(getContactEntities, getMatc
       : matchingIds.map(x => allContacts[x])
     );
 
-    // export const getDuplicatedContacts = createSelector(getContactEntities, getDuplicatedContactIds,
-    //   (allContacts, matchingIds: string[]) =>  
-    //       matchingIds.map(x => allContacts[x])
-    //   );
+    

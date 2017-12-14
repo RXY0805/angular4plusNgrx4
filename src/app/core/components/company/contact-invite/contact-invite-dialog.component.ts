@@ -5,7 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material"
 import { Project, ProjectInvitation } from '@app-core/models';
 
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions';
-import * as projectInvitationActions from '@app-contacts-store/actions/project-invitation-actions';
 
 import { selectMatchingContacts, getAvailableContacts, getDuplicatedContactIds } from '@app-contacts-store/reducers/contacts-reducer';
 
@@ -33,7 +32,8 @@ import * as fromContacts from '@app-contacts-store'
     
     constructor(public dialogRef: MatDialogRef<ContactInviteDialog>, @Inject(MAT_DIALOG_DATA) public data: any, public store: Store<fromContacts.State>) { 
         this.noneContractInvited = true;
-        this.invitation.projectId = data.projectId;
+       
+        this.invitation = data.invitation;
         this.isExistedEmail = false;
     }
   
@@ -42,17 +42,18 @@ import * as fromContacts from '@app-contacts-store'
         }
 
         getInvitedContactIds(invitedContactIds){
+            
             this.invitation.existContractIds = invitedContactIds;
             this.noneContractInvited = !this.invitation.existContractIds.length;
         }
 
-        onInvitation(): void {
+        //onInvitation(): void {
             //dispatch create invitation action then post data to web api
             //alert("please check console log");
-            console.log(this.invitation);
-            debugger;
-            this.store.dispatch(new projectInvitationActions.Create(this.invitation));
-        }
+            // console.log(this.invitation);
+            // debugger;
+            // this.store.dispatch(new projectInvitationActions.Create(this.invitation));
+        //}
 
         triggerEmailSearch(value){
 

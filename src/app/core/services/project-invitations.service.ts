@@ -30,6 +30,7 @@ export class ProjectInvitationsService {
   }
 
   create(projectInvitation: ProjectInvitation): Observable<ProjectInvitation> {
+    alert('call service');
     debugger;
     return this.http.post<ProjectInvitation>(`${environment.appApi.baseUrl}/projectInvitations`, projectInvitation)
   }

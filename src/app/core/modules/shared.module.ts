@@ -18,6 +18,7 @@ import { ContactInviteComponent } from '../components/company/contact-invite/con
 import { ContactInviteDialog } from '../components/company/contact-invite/contact-invite-dialog.component';
 
 import { ContactsService } from '../services/contacts.service';
+import { ProjectInvitationsService } from '../services/project-invitations.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -58,6 +59,6 @@ import { TitleResolver } from '../resolvers/title.resolver';
   ],
   //entryComponents: [ContactInviteComponent, ContactInviteDialog],
   bootstrap:[ContactInviteComponent, ContactInviteDialog],
-  providers: [ContactsService, GroupsService, TitleResolver]
+  providers: [ContactsService, ProjectInvitationsService, GroupsService, TitleResolver]
 })
 export class SharedModule { }

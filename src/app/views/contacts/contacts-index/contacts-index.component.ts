@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import { Contact , ContactFilter, Project} from '@app-core/models';
+import { Contact , ContactFilter, Project, ProjectInvitation} from '@app-core/models';
 
 
 
@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import * as fromContacts from '@app-contacts-store'
 import * as contactsActions from '@app-contacts-store/actions/contacts-actions'
+import * as projectInvitationActions from '@app-contacts-store/actions/project-invitation-actions';
 //import * as projectInvitationActions from '@app-contacts-store/actions/project-invitation-actions';
 import * as fromRoot from '@app-root-store';
 
@@ -65,6 +66,10 @@ export class ContactsIndexComponent implements OnInit {
     this.store.dispatch(new contactsActions.Search(event));
   }
 
+  inviteContact(event : ProjectInvitation){
+    alert('send invitation');
+    this.store.dispatch(new projectInvitationActions.Create(event));
+  }
   editContact(contact: Contact) {
     this.store.dispatch(new contactsActions.SetCurrentContactId(contact.id));
     this.router.navigate(['/contractors', contact.id, 'edit'])
