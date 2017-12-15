@@ -68,27 +68,53 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="karma.conf.js" />
     <Content Include="package.json" />
+    <Content Include=".angular-cli.json" />
+    <Content Include=".dockerignore" />
+    <Content Include=".editorconfig" />
+    <Content Include="docker-compose.yml" />
+    <Content Include="Dockerfile" />
+    <Content Include="LICENSE.md" />
+    <Content Include="package-lock.json" />
+    <Content Include="e2e\tsconfig.e2e.json" />
+    <Content Include="nginx\default.conf" />
     <None Include="packages.config" />
+    <Content Include="protractor.conf.js" />
     <Content Include="src\app\core\components\company\contact-details\contact-details-container.component.sass" />
     <Content Include="src\app\core\components\company\contact-form\contact-form.component.sass" />
+    <Content Include="src\app\core\components\company\contact-invite\contact-invite-dialog.component.css" />
+    <Content Include="src\app\core\components\company\contact-invite\contact-invite-dialog.component.html" />
+    <Content Include="src\app\core\components\company\contact-invite\contact-invite.component.html" />
     <Content Include="src\app\core\components\company\contact-list\contact-list.component.sass" />
+    <Content Include="src\app\core\components\company\example.html" />
     <Content Include="src\app\core\components\toolbar\toolbar.component.sass" />
+    <Content Include="src\app\test\test.component.html" />
     <Content Include="src\app\views\contacts\contact-details\contact-details.component.sass" />
     <Content Include="src\app\views\contacts\contact-edit\contact-edit.component.sass" />
     <Content Include="src\app\views\contacts\contact-new\contact-new.component.sass" />
+    <Content Include="src\app\views\contacts\contacts-index\contacts-index.component.css" />
     <Content Include="src\app\views\contacts\contacts-index\contacts-index.component.sass" />
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\assets\data\company.json" />
-    <Content Include="src\styles.sass" /> 
+    <Content Include="src\styles.sass" />
     <Content Include="src\tsconfig.app.json" />
     <Content Include="src\tsconfig.spec.json" />
+    <Content Include="README.md" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
+    <Content Include="src\app\test\test.component.sass" />
+    <Content Include="src\app\core\services\company.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="yarn.lock" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\app\core\components\company\contact-details\contact-details-container.component.html" />
@@ -105,9 +131,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="e2e\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="e2e\app.po.ts" />
+    <TypeScriptCompile Include="src\app\app-material.module.ts" />
     <TypeScriptCompile Include="src\app\app-routing.module.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
@@ -115,23 +147,30 @@
     <TypeScriptCompile Include="src\app\core\components\company\contact-details\contact-details-container.component.ts" />
     <TypeScriptCompile Include="src\app\core\components\company\contact-form\contact-form.component.spec.ts" />
     <TypeScriptCompile Include="src\app\core\components\company\contact-form\contact-form.component.ts" />
+    <TypeScriptCompile Include="src\app\core\components\company\contact-invite\contact-invite-dialog.component.ts" />
+    <TypeScriptCompile Include="src\app\core\components\company\contact-invite\contact-invite.component.ts" />
     <TypeScriptCompile Include="src\app\core\components\company\contact-list\contact-list.component.spec.ts" />
     <TypeScriptCompile Include="src\app\core\components\company\contact-list\contact-list.component.ts" />
     <TypeScriptCompile Include="src\app\core\components\company\contact-search\contact-search.component.ts" />
+    <TypeScriptCompile Include="src\app\core\components\company\example.ts" />
     <TypeScriptCompile Include="src\app\core\components\toolbar\toolbar.component.spec.ts" />
     <TypeScriptCompile Include="src\app\core\components\toolbar\toolbar.component.ts" />
     <TypeScriptCompile Include="src\app\core\models\contact.ts" />
     <TypeScriptCompile Include="src\app\core\models\group.ts" />
     <TypeScriptCompile Include="src\app\core\models\index.ts" />
+    <TypeScriptCompile Include="src\app\core\models\project.ts" />
     <TypeScriptCompile Include="src\app\core\modules\shared.module.ts" />
     <TypeScriptCompile Include="src\app\core\resolvers\title.resolver.ts" />
     <TypeScriptCompile Include="src\app\core\services\contacts.service.spec.ts" />
     <TypeScriptCompile Include="src\app\core\services\contacts.service.ts" />
     <TypeScriptCompile Include="src\app\core\services\groups.service.spec.ts" />
     <TypeScriptCompile Include="src\app\core\services\groups.service.ts" />
+    <TypeScriptCompile Include="src\app\core\services\project-invitations.service.ts" />
     <TypeScriptCompile Include="src\app\store\actions\ui-actions.ts" />
     <TypeScriptCompile Include="src\app\store\index.ts" />
     <TypeScriptCompile Include="src\app\store\reducers\ui-reducer.ts" />
+    <TypeScriptCompile Include="src\app\test\test.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\test\test.component.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\contact-details\contact-details.component.spec.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\contact-details\contact-details.component.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\contact-edit\contact-edit.component.spec.ts" />
@@ -144,9 +183,12 @@
     <TypeScriptCompile Include="src\app\views\contacts\contacts.component.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\contacts.module.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\store\actions\contacts-actions.ts" />
+    <TypeScriptCompile Include="src\app\views\contacts\store\actions\project-invitation-actions.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\store\effects\contacts-effects.ts" />
+    <TypeScriptCompile Include="src\app\views\contacts\store\effects\project-invitations-effects.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\store\index.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\store\reducers\contacts-reducer.ts" />
+    <TypeScriptCompile Include="src\app\views\contacts\store\reducers\project-invitation-reducer.ts" />
     <TypeScriptCompile Include="src\app\views\contacts\store\reducers\search.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
@@ -157,6 +199,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\authentication\components\" />
+    <Folder Include="src\app\authentication\store\" />
+    <Folder Include="src\app\authentication\views\" />
+    <Folder Include="src\app\contractors\components\" />
+    <Folder Include="src\app\contractors\models\" />
+    <Folder Include="src\app\contractors\store\" />
+    <Folder Include="src\app\contractors\views\" />
+    <Folder Include="src\app\projects\" />
+    <Folder Include="src\app\reducers\" />
+    <Folder Include="src\app\staff\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

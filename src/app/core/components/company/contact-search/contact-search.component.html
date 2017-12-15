@@ -1,22 +1,22 @@
+<div>
+  <h2>Please select the project</h2>
 
-  <h3>Please select the project</h3>
-
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="example-full-width">
-          <mat-select placeholder="selected project" [(ngModel)]="contactFilter.selectedProjectId" (selectionChange)="triggerFilter()">
-            <mat-option *ngFor="let p of projects" [value]="p.id">{{p.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <section class="search-section">
-          Pending Contractors
-          <mat-checkbox class="search-margin" (change)="triggerFilter()" [(ngModel)]="contactFilter.isPending">
-          </mat-checkbox>
-        </section>
-      </td>
-    </tr>
-  </table>
-
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="selected project" [(ngModel)]="contactFilter.selectedProjectId" (selectionChange)="triggerFilter()">
+              <mat-option *ngFor="let p of projects" [value]="p.id">{{p.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <section class="search-section">
+            Pending Contractors
+            <mat-checkbox class="search-margin" (change)="triggerFilter()" [(ngModel)]="contactFilter.isPending">
+            </mat-checkbox>
+          </section>
+        </td>
+      </tr>
+    </table>
+</div>
