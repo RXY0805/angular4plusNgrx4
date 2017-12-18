@@ -13,8 +13,10 @@ export class SetCurrentInvitationId implements Action {
 
 export class Create implements Action {
   readonly type = CREATE;
-  debugger;
-  constructor(public payload:  ProjectInvitation) {}
+  
+  constructor(public payload:  ProjectInvitation) {
+    alert("create invitation action");
+  }
 }
 
 

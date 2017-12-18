@@ -1,6 +1,8 @@
 <h1 class="redset"> Contact list</h1>
 
-<app-contact-search [projects]="projects$" [contactFilter]="contactFilter$" (onSearch)="searchContacts($event)" ></app-contact-search>
+<app-contact-search [projects]="projects$" [contactFilter]="contactFilter$" 
+                    [projectStatus]="projectStatus$" [auditStatus]="auditStatus$"
+                    [projectOnSiteStatus]="projectOnSiteStatus$" (onSearch)="searchContacts($event)" ></app-contact-search>
 
 <app-contact-invite [currentProject]="currentProject$" [availableContacts]="availableContacts$" (onInvite)="inviteContact($event)"></app-contact-invite>
 

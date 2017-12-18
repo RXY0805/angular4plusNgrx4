@@ -12,6 +12,9 @@ export interface ContactFilter {
   searchText: string;
   isPending: boolean;
   selectedProjectId: number;
+  selectedProjectStatusId: number;
+  selectedAuditStatusId: number;
+  selectedProjectOnSiteStatusId: number;
 }
 
 
