@@ -1,5 +1,5 @@
 <div>
-    <table class="example-full-width" cellspacing="0">
+    <table>
       <tr>
         <td>
           <mat-form-field class="example-full-width">
@@ -9,34 +9,22 @@
           </mat-form-field>
         </td>
         <td>
-          <section class="search-section">
-            Pending Contractors
-            <mat-checkbox class="search-margin" (change)="triggerFilter()" [(ngModel)]="contactFilter.isPending">
-            </mat-checkbox>
-          </section>
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="selected project status" [(ngModel)]="contactFilter.selectedProjectStatusId" (selectionChange)="triggerFilter()">
+                  <!--  -->
+                <mat-option *ngFor="let ps of projectStatus" [value]="ps.id">{{ps.status}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </td>
+        <td>
+            <section class="search-section">
+              Pending Contractors
+              <mat-checkbox class="search-margin" (change)="triggerFilter()" [(ngModel)]="contactFilter.isPending">
+              </mat-checkbox>
+            </section>
         </td>
       </tr>
     
-
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-            <mat-select placeholder="selected project status" [(ngModel)]="contactFilter.selectedProjectStatusId" (selectionChange)="triggerFilter()">
-                <!--  -->
-              <mat-option *ngFor="let ps of projectStatus" [value]="ps.id">{{ps.status}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-            <mat-select placeholder="selected onsite status" [(ngModel)]="contactFilter.selectedProjectOnSiteStatusId">
-              <mat-option *ngFor="let s of projectOnSiteStatus" [value]="s.id">{{s.status}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
-      </tr>
       <tr>
         <td>
           <mat-form-field class="example-full-width">
@@ -45,6 +33,13 @@
             </mat-select>
           </mat-form-field>
         </td>
+        <td>
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="selected onsite status" [(ngModel)]="contactFilter.selectedProjectOnSiteStatusId">
+                <mat-option *ngFor="let s of projectOnSiteStatus" [value]="s.id">{{s.status}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
       </tr>
     </table>
 </div>
