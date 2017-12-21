@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 //import { SharedModule } from '@app-core/modules/shared.module';
+import { SharedContractorComponentsModule } from './components/index';
 
 import { ContractorsRoutingModule } from './contractors-routing.module';
 import { StoreModule } from '@ngrx/store';
@@ -24,6 +25,7 @@ import { ContractorService } from '../shared/services/contractor.service';
   imports: [
     FormsModule,
     CommonModule,
+    SharedContractorComponentsModule,
     //SharedModule,
     ContractorsRoutingModule,
     StoreModule.forFeature('contractors', fromContractors.reducers),

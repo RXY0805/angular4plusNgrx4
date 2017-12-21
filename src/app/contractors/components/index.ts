@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 
 import { ContractorListComponent } from './contractor-list/contractor-list.component'
 import { ContractorSearchComponent } from './contractor-search/contractor-search.component'
@@ -19,18 +19,19 @@ import { AppMaterialModule } from '../../app-material.module';
 export const COMPONENTS = [
     ContractorListComponent,
     ContractorSearchComponent
-  
 ];
+
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    FormsModule,
     AppMaterialModule,
     //PipesModule,
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS,
+  exports:  COMPONENTS
 })
-export class ComponentsModule {}
+export class SharedContractorComponentsModule {}

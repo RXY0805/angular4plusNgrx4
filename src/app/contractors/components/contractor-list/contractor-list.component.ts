@@ -41,17 +41,17 @@ export class ContractorListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.defaultPageSize = this.isCheckable ? 5:10;
-    this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending'];
-    this.contractorsDatabase = new ContractorDatabase(this.contractors);
-    this.dataSource = new ContractorDataSource(this.contractorsDatabase, this.paginator, this.sort);
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
-      .debounceTime(150)
-      .distinctUntilChanged()
-      .subscribe(() => {
-        if (!this.dataSource) { return; }
-        this.dataSource.filter = this.filter.nativeElement.value;
-      });
+    // this.defaultPageSize = this.isCheckable ? 5:10;
+    // this.displayedColumns = [ 'id', 'name', 'email', 'phone','isPending'];
+    // this.contractorsDatabase = new ContractorDatabase(this.contractors);
+    // this.dataSource = new ContractorDataSource(this.contractorsDatabase, this.paginator, this.sort);
+    // Observable.fromEvent(this.filter.nativeElement, 'keyup')
+    //   .debounceTime(150)
+    //   .distinctUntilChanged()
+    //   .subscribe(() => {
+    //     if (!this.dataSource) { return; }
+    //     this.dataSource.filter = this.filter.nativeElement.value;
+    //   });
   }
 
   toggleInviteContractor(contractorId) {
