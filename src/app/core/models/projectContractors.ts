@@ -27,5 +27,5 @@ export interface Contractor {
 
   export interface ProjectContractors{
     project: Project;
-    Contractors: Contractor[];
+    contractors: Contractor[];
   }

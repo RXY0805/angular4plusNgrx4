@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import { Contractor } from '@app-core/models';
+import { Contractor, ProjectContractors } from '@app-core/models';
 import {Http} from '@angular/http';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -8,14 +8,14 @@ import {HttpClient} from '@angular/common/http';
 
 
 @Injectable()
-export class ContractorsService {
+export class ContractorService {
 
   constructor(private http: HttpClient ) { }
 
 
-  getAllContractors(): Observable<Contractor[]> {
+  getAllContractors(): Observable<ProjectContractors[]> {
        
-       return this.http.get<Contractor[]>(`${environment.dataFolder}/company.json`)
+       return this.http.get<ProjectContractors[]>(`${environment.dataFolder}/test.json`)
         .map(res=> res);
     // call 3DSS api service 
     //  return this.http

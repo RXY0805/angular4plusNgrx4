@@ -17,8 +17,9 @@
       "dom"
     ],
     "paths": {
+      "@app-shared/*": ["app/shared/*"],
       "@app-core/*": ["app/core/*"],
-
+      "@app-core-store/*": ["app/core/store/*"],
       "@app-root-store/*": ["app/store/*"],
       "@app-root-store": ["app/store/index"],
 

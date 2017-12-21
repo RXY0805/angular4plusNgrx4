@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Contractor, ProjectContractorInvitation } from '@app-core/models';
+import { Contractor, ContractorFilter, ProjectContractorInvitation } from '@app-core/models';
 
 export const LOAD_ALL = '[Contractors] LOAD ALL';
 export const LOAD_ALL_SUCCESS = '[Contractors] LOAD ALL SUCCESS';
@@ -19,9 +19,6 @@ export const INVITE_TO_PROJECT ='[Contractors] INVITE TO PROJECT';
 
 export const SET_CURRENT_CONTRACTOR_ID = '[Contractors] SET CURRENT CONTRACTOR ID';
 
-import { ContractorFilter } from '@app-core/models';
-
-
 export class SetCurrentContractorId implements Action {
   readonly type = SET_CURRENT_CONTRACTOR_ID;
   constructor(public payload: string) {}
@@ -32,21 +29,14 @@ export class LoadAll implements Action {
   constructor(public payload = null) {}
 }
 
-export class Load implements Action {
-  readonly type = LOAD;
-  constructor(public payload: string) {}
-}
-
-
-export class InviteToProject implements Action {
-  readonly type = INVITE_TO_PROJECT;
-  constructor(public payload: ProjectContractorInvitation) {}
-}
-
-
 export class LoadAllSuccess implements Action {
   readonly type = LOAD_ALL_SUCCESS;
   constructor(public payload: Contractor[]) {}
+}
+
+export class Load implements Action {
+  readonly type = LOAD;
+  constructor(public payload: string) {}
 }
 
 export class LoadSuccess implements Action {
@@ -54,6 +44,10 @@ export class LoadSuccess implements Action {
   constructor(public payload: Contractor) {}
 }
 
+export class InviteToProject implements Action {
+  readonly type = INVITE_TO_PROJECT;
+  constructor(public payload: ProjectContractorInvitation) {}
+}
 
 export class Search implements Action {
   readonly type = SEARCH;

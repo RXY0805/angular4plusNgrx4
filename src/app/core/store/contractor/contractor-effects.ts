@@ -3,10 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 
 import * as contractorActions from './contractor-actions';
+import * as projectActions from '../project/project-actions';
 
 import { Actions, Effect} from '@ngrx/effects';
 import { Contractor, ProjectContractorInvitation } from '@app-core/models';
-import { ContractorsService } from 'app/shared/services/contractor.service';
+import { ContractorService } from 'app/shared/services/contractor.service';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
@@ -18,7 +19,7 @@ import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
 
 @Injectable()
-export class ContractorsEffects {
+export class ContractorEffects {
 
   @Effect()
   loadAll$: Observable<Action> = this.actions$
@@ -27,13 +28,18 @@ export class ContractorsEffects {
       .switchMap((payload) =>
           this.contractorService.getAllContractors() 
       )
-      .map((contractor: Contractor[]) => new contractorActions.LoadAllSuccess(contractor));
+      .mergeMap((data:any)=>{
+        return [ 
+            new contractorActions.LoadAllSuccess(data.contractors),
+            new projectActions.LoadAllSuccess(data.project)
+        ];
+      })
+      //.map((contractor: Contractor[]) => new contractorActions.LoadAllSuccess(contractor));
 
      
   constructor(
       private actions$: Actions,
-      private contractorService: ContractorsService
+      private contractorService: ContractorService
   ) {}
-
 
 }
