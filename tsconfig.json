@@ -22,6 +22,9 @@
       "@app-core-store/*": ["app/core/store/*"],
       "@app-root-store/*": ["app/store/*"],
       "@app-root-store": ["app/store/index"],
+      
+      "@app-store-contractor": ["app/core/store/contractor/index"],
+      "@app-store-contractor/*": ["app/core/store/contractor/*"],
 
       "@app-contacts-store/*": ["app/views/contacts/store/*"],
       "@app-contacts-store": ["app/views/contacts/store/index"],

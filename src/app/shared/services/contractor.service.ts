@@ -13,9 +13,9 @@ export class ContractorService {
   constructor(private http: HttpClient ) { }
 
 
-  getAllContractors(): Observable<ProjectContractors[]> {
+  getAllContractors(): Observable<ProjectContractors> {
        
-       return this.http.get<ProjectContractors[]>(`${environment.dataFolder}/test.json`)
+       return this.http.get<ProjectContractors>(`assets/data/test.json`)
         .map(res=> res);
     // call 3DSS api service 
     //  return this.http
