@@ -6,13 +6,13 @@ import { Contractor , ContractorFilter, Project, ProjectInvitation, ProjectStatu
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// import * as fromContractors from '@app-contractors-store'
-// import * as contractorsActions from '@app-contractors-store/actions/contractors-actions'
+import * as fromContractors from '@app-store-contractor';
+import * as contractorsActions from '@app-store-contractor/contractor-actions';
 // import * as projectInvitationActions from '@app-contractors-store/actions/project-invitation-actions';
 //import * as projectInvitationActions from '@app-contractors-store/actions/project-invitation-actions';
 import * as fromRoot from '@app-root-store';
 
-//import { selectMatchingContractors, getAvailableContractors, getDuplicatedContractorIds } from '@app-contractors-store/reducers/contractors-reducer';
+import { selectMatchingContractors, getAvailableContractors, getDuplicatedContractorIds } from '@app-store-contractor/contractor-reducers';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -47,14 +47,16 @@ export class ContractorIndex implements OnInit {
    public auditStatus$: AuditStatus[];
  
   constructor(
-      //public store: Store<fromContractors.State>, 
+      public store: Store<fromContractors.State>, 
       private router: Router, 
       private actR: ActivatedRoute) {
-        // this.contractors$ = this.store.select(state => selectMatchingContractors(state.contractors.contractors));
+         this.contractors$ = this.store.select(state => selectMatchingContractors(state.contractors.contractors));
         // this.availableContractors$= this.store.select(state => getAvailableContractors(state.contractors.contractors));
         //this.store.select(state => getDuplicatedContractorIds(state.contractors.contractors)).subscribe(res => this.duplicatedContractorIds$ = res as string[]);
         //debugger;
-        //this.store.dispatch(new contractorsActions.LoadAll());
+        this.store.dispatch(new contractorsActions.LoadAll());
+        alert('load');
+        debugger;
     }
 
   ngOnInit() {

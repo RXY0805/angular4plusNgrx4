@@ -7,11 +7,12 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "eslint .",
     "e2e": "ng e2e",
     "copy": "xcopy \"dist\" \"..\\Website\\AppScripts\\NgApp\" /i /s /r /y /c",
     "dist": "npm run build && npm run copy",
-    "surge-deploy": "ng build --prod --build-optimizer  && cp dist/index.html dist/200.html && surge --domain angular-contacts-ngrx.surge.sh --project ./dist "
+    "surge-deploy": "ng build --prod --build-optimizer  && cp dist/index.html dist/200.html && surge --domain angular-contacts-ngrx.surge.sh --project ./dist ",
+    "format": "prettier-eslint '{src,test,app}/**/*.{js,ts,css}' --write"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,11 @@
     "@types/jasminewd2": "^2.0.2",
     "@types/node": "^8.0.46",
     "codelyzer": "^3.2.1",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
     "jasmine-core": "^2.6.2",
     "jasmine-spec-reporter": "^4.1.0",
     "karma": "^1.7.0",
@@ -55,9 +61,25 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "^1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "prettier": "1.10.2",
+    "prettier-eslint-cli": "^4.7.0",
     "protractor": "^5.1.2",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
     "typescript": "^2.6.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": false
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
   }
 }

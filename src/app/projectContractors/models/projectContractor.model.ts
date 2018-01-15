@@ -1,14 +1,5 @@
-import { Project } from './project';
+  import {Contractor} from './contractor.model';
 
-export interface Contractor {
-    projectId: number;
-    companyId?: number;
-    name: string;
-    email: string;
-    statusId: number;
-    onSite: boolean;
-    auditStatus: boolean;
-  }
 
   export interface ContractorFilter {
     searchText: string;
@@ -25,8 +16,8 @@ export interface Contractor {
     newContractEmail?: string;
   }
 
-  export interface ProjectContractors{
-    projectId: number;
+  export interface ProjectContractor{
+    id: number;
     projectName: string;
     contractors: Contractor[];
   }
