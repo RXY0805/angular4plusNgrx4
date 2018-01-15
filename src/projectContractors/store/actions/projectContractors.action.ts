@@ -16,7 +16,7 @@ export class LoadProjectContractorsFail implements Action {
 }
 
 export class LoadProjectContractorsSuccess implements Action {
-    readonly type = LOAD_PROJECTCONTRACTORS;
+    readonly type = LOAD_PROJECTCONTRACTORS_SUCCESS;
     constructor(public payload: ProjectContractor[]) {}
 }
 
