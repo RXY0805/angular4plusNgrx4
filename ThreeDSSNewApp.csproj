@@ -101,6 +101,7 @@
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\assets\data\company.json" />
     <Content Include="src\styles.sass" />
+    <Content Include="src\test\test.component.html" />
     <Content Include="src\tsconfig.app.json" />
     <Content Include="src\tsconfig.spec.json" />
     <Content Include="README.md" />
@@ -108,6 +109,7 @@
     <Content Include="tslint.json" />
     <Content Include="src\app\test\test.component.sass" />
     <Content Include="src\app\core\services\company.json" />
+    <Content Include="src\test\test.component.sass" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -194,7 +196,22 @@
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\projectContractors\models\company.model.ts" />
+    <TypeScriptCompile Include="src\projectContractors\models\contractor.model.ts" />
+    <TypeScriptCompile Include="src\projectContractors\models\projectContractor.model.ts" />
+    <TypeScriptCompile Include="src\projectContractors\services\index.ts" />
+    <TypeScriptCompile Include="src\projectContractors\services\projectContractors.service.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\actions\index.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\actions\projectContractors.action.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\effects\index.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\effects\projectContractors.effect.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\reducers\index.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\reducers\projectContractors.reducer.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\selectors\index.ts" />
+    <TypeScriptCompile Include="src\projectContractors\store\selectors\projectContractors.selectors.ts" />
     <TypeScriptCompile Include="src\test.ts" />
+    <TypeScriptCompile Include="src\test\test.component.spec.ts" />
+    <TypeScriptCompile Include="src\test\test.component.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +228,10 @@
     <Folder Include="src\app\projects\" />
     <Folder Include="src\app\reducers\" />
     <Folder Include="src\app\staff\" />
+    <Folder Include="src\projectContractors\components\contractor-invite\" />
+    <Folder Include="src\projectContractors\components\contractor-list\" />
+    <Folder Include="src\projectContractors\components\contractor-search\" />
+    <Folder Include="src\projectContractors\containers\contractor-index\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

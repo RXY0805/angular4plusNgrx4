@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, LoadChildren } from '@angular/router';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from '../test/test.component';
 
 import { ContactsModule } from './views/contacts/contacts.module';
 import { ContractorsModule } from './contractors/contractors.module';

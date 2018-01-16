@@ -18,7 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 //import { SharedModule } from './core/modules/shared.module';
 
 import * as fromRoot from '@app-root-store';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from '../test/test.component';
 
 
 
