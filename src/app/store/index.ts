@@ -17,6 +17,10 @@ export const getUiState = createFeatureSelector<fromUi.UiState>('ui');
 
 export const getCurrentTitle = createSelector(getUiState, fromUi.getCurrentTitle);
 
+export * from './reducers';
+export * from './actions';
+export * from './effects';
+
 
 
 
